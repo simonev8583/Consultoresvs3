@@ -68,4 +68,19 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+@Scripts.Render("~/bundles/jqueryval")
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+            $('#datetimepicker1').datetimepicker({
+                viewMode: 'years',
+                format: 'DD/MM/YYYY'
+            });
+    </script>
 }
