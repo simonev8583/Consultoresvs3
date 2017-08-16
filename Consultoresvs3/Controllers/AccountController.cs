@@ -151,7 +151,7 @@ namespace Consultoresvs3.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellido = model.Apellido, Identificacion = model.Identificacion, FechaIngresoEmpresa = model.FechaIngresoEmpresa, FechaNacimiento = model.FechaNacimiento, Salario = model.Salario, Cargo = model.Cargo, ValorHoraNoPrestacionSociales = model.ValorHoraNoPrestacionSociales, ValorHoraPrestacionesSociales = model.ValorHoraPrestacionesSociales };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

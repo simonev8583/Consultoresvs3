@@ -79,6 +79,23 @@ namespace Consultoresvs3.Models
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
+        public string Apellido { get; set; }
+        [Required]
+        public int Identificacion { get; set; }
+        [Display(Name = "Fecha de Ingreso")]
+        public string FechaIngresoEmpresa { get; set; }
+        [Required]
+        [Display(Name = "Fecha de Nacimiento")]
+        public string FechaNacimiento { get; set; }
+        [Required]
+        public string Cargo { get; set; }
+        public double Salario { get; set; }
+        public double ValorHoraPrestacionesSociales { get; set; }
+        public double ValorHoraNoPrestacionSociales { get; set; }
     }
 
     public class ResetPasswordViewModel

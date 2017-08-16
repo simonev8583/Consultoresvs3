@@ -18,6 +18,36 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Apellido, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Identificacion, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Identificacion, new { @class = "form-control", @id = "Fnac" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FechaNacimiento, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FechaNacimiento, new { @class = "form-control", @id = "datetimepicker1" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Cargo, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Cargo, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
