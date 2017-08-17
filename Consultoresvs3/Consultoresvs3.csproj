@@ -197,6 +197,7 @@
     <Compile Include="Controllers\ReporteProyectosController.cs" />
     <Compile Include="Controllers\ReporteUsuariosController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
+    <Compile Include="Controllers\UsuarioProyectosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -406,6 +407,11 @@
     <Content Include="Views\Servicios\Details.cshtml" />
     <Content Include="Views\Servicios\Edit.cshtml" />
     <Content Include="Views\Servicios\Index.cshtml" />
+    <Content Include="Views\UsuarioProyectos\Create.cshtml" />
+    <Content Include="Views\UsuarioProyectos\Delete.cshtml" />
+    <Content Include="Views\UsuarioProyectos\Details.cshtml" />
+    <Content Include="Views\UsuarioProyectos\Edit.cshtml" />
+    <Content Include="Views\UsuarioProyectos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
