@@ -40,7 +40,7 @@ namespace Consultoresvs3.Controllers
         public ActionResult Create()
         {
             ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre");
-            ViewBag.IdUsuario = new SelectList(db.ApplicationUsers, "Id", "Nombre");
+            ViewBag.IdUsuario = new SelectList(db.Users, "Id", "Nombre");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace Consultoresvs3.Controllers
             }
 
             ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre", usuarioProyecto.IdProyecto);
-            ViewBag.IdUsuario = new SelectList(db.ApplicationUsers, "Id", "Nombre", usuarioProyecto.IdUsuario);
+            ViewBag.IdUsuario = new SelectList(db.Users, "Id", "Nombre", usuarioProyecto.IdUsuario);
             return View(usuarioProyecto);
         }
 
@@ -76,7 +76,7 @@ namespace Consultoresvs3.Controllers
                 return HttpNotFound();
             }
             ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre", usuarioProyecto.IdProyecto);
-            ViewBag.IdUsuario = new SelectList(db.ApplicationUsers, "Id", "Nombre", usuarioProyecto.IdUsuario);
+            ViewBag.IdUsuario = new SelectList(db.Users, "Id", "Nombre", usuarioProyecto.IdUsuario);
             return View(usuarioProyecto);
         }
 
@@ -94,7 +94,7 @@ namespace Consultoresvs3.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre", usuarioProyecto.IdProyecto);
-            ViewBag.IdUsuario = new SelectList(db.ApplicationUsers, "Id", "Nombre", usuarioProyecto.IdUsuario);
+            ViewBag.IdUsuario = new SelectList(db.Users, "Id", "Nombre", usuarioProyecto.IdUsuario);
             return View(usuarioProyecto);
         }
 
