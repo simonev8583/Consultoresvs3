@@ -14,15 +14,24 @@ namespace Consultoresvs3.Models
         public int NIT { get; set; }
         [Display(Name = "Nombre Empresa")]
         public string NombreEmpresa { get; set; }
+        [Display(Name = "Direccion")]
         public string Direccion { get; set; }
         // validar que sea correo
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Correo")]
         public string CorreoEmpresa { get; set; }
         // deben ser 4 digitos
+        [Display(Name = "Actividad Economica")]
         public int ActividadEconomica { get; set; }
+        [Display(Name = "Telefono")]
         public int Telefono { get; set; }
+        [Display(Name = "Nombre representante legal")]
         public string NombreRepLegal { get; set; }
+        [Display(Name = "Identificación representante legal")]
         public int IdentificacionRepLegal { get; set; }
+        [Display(Name = "Nombre representante suplente")]
         public string NombreRepSuplente { get; set; }
+        [Display(Name = "Identificación representante suplente")]
         public int IdentificacionRepSuplente { get; set; }
         [Display(Name = "Miembro Junta Directiva Principal")]
         public string NombreJuntaDir1 { get; set; }
