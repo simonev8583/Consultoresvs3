@@ -11,8 +11,12 @@ namespace Consultoresvs3.Models
     {
         [Key]
         public int Id { get; set; }
-        [DataType(DataType.DateTime)]
+
+        [Display(Name = "Fecha")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString ="{0:yyyy/MM/dd}",ApplyFormatInEditMode =true)]
         public DateTime FechaReporte { get; set; }
+
         [Display(Name = "Horas Trabajadas")]
         public int HTrabajadas { get; set; }
         public int IdServicio { get; set; }
