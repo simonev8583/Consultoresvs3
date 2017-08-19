@@ -93,7 +93,6 @@ namespace Consultoresvs3.Controllers
             ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre", reporteProyecto.IdProyecto);
             return View(reporteProyecto);
         }
-
         // GET: ReporteProyectos/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -127,6 +126,30 @@ namespace Consultoresvs3.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        // Se crea el reporte de proyecto 
+        public ActionResult ReporteProyecto(int id)
+        {
+            int horasTrabajadas = 0;
+            var listamatriculas = db.UsuarioProyectos.Where(t => t.IdProyecto == id).ToList();
+            for (int i = 0; i < listamatriculas.Count; i++)
+            {
+                var l = listamatriculas[i];
+                var reportesproyectos = db.ReporteUsuarios.Where(t => t.IdUsuarioProyecto == l.Id).ToList();
+                for (int j = 0; j < reportesproyectos.Count; j++)
+                {
+                    horasTrabajadas += reportesproyectos[j].HTrabajadas;
+                }
+            }
+            ReporteProyecto reporte = new ReporteProyecto();
+            reporte.HorasInvertidas = horasTrabajadas;
+            Proyecto proyecto = db.Proyectos.Find(id);
+            reporte.IdProyecto = proyecto.Id;
+            reporte.Proyecto = proyecto;
+            reporte.Utilidad = proyecto.TiempoEstipulado - horasTrabajadas;
+            db.ReporteProyectos.Add(reporte);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

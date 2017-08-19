@@ -27,8 +27,8 @@ namespace Consultoresvs3.Migrations
             context.EstadoProyectos.AddOrUpdate(
                 a => a.Id,
                 new EstadoProyecto { Id = 1, Nombre = "Ejecucion" },
-                new EstadoProyecto { Id = 2, Nombre = "Finalizado" },
-                new EstadoProyecto { Id = 3, Nombre = "Pausado" }
+                new EstadoProyecto { Id = 2, Nombre = "Pausado" },
+                new EstadoProyecto { Id = 3, Nombre = "Finalizado" }
 
             );
 
@@ -78,9 +78,9 @@ namespace Consultoresvs3.Migrations
             );
             context.Proyectos.AddOrUpdate(
                 a => a.Id,
-                new Proyecto { Id = 1, Nombre = "Auditoria", Precio = 1.500000, TiempoEstipulado = 10, IdEmpresa = 1, Fecha = new DateTime(1996, 05, 22, 12, 00, 00), IdEstado = 1 },
-                new Proyecto { Id = 2, Nombre = "Ventas", Precio = 21.500000, TiempoEstipulado = 150, IdEmpresa = 2, Fecha = new DateTime(1996, 12, 12, 12, 00, 00), IdEstado = 2 },
-                new Proyecto { Id = 3, Nombre = "Recursos Humanos", Precio = 12.000000, TiempoEstipulado = 30, IdEmpresa = 1, Fecha = new DateTime(1996, 8, 5, 12, 00, 00), IdEstado = 1 }
+                new Proyecto { Id = 1, Nombre = "Ballen", Precio = 1500000, TiempoEstipulado = 200, IdEmpresa = 1, Fecha = new DateTime(1996, 05, 22, 12, 00, 00), IdEstado = 1 },
+                new Proyecto { Id = 2, Nombre = "Marqueting", Precio = 21500000, TiempoEstipulado = 400, IdEmpresa = 2, Fecha = new DateTime(1996, 12, 12, 12, 00, 00), IdEstado = 2 },
+                new Proyecto { Id = 3, Nombre = "Casanova", Precio = 12000000, TiempoEstipulado = 100, IdEmpresa = 1, Fecha = new DateTime(1996, 8, 5, 12, 00, 00), IdEstado = 1 }
             );
             // CREAR ADMINISTRADOR
             var store = new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(
@@ -108,9 +108,23 @@ namespace Consultoresvs3.Migrations
                 FechaNacimiento = "12/12/2013",
                 Cargo = "Gerente"
             };
-            if (manager.FindByName("admin@vuelos.com") == null)
+            var user1 = new ApplicationUser
+            {
+                UserName = "daniel@consultores.com",
+                Nombre = "Cristian",
+                Apellido = "Castañeda",
+                Identificacion = 0021223344,
+                FechaIngresoEmpresa = "12/12/2013",
+                FechaNacimiento = "12/12/2013",
+                Cargo = "Administrador"
+            };
+            if (manager.FindByName("admin@consultores.com") == null)
             {
                 manager.Create(user, "consultores");
+            }
+            if (manager.FindByName("daniel@consultores.com") == null)
+            {
+                manager.Create(user1, "consultores");
             }
 
             var userdb = manager.FindByName(user.UserName);
@@ -122,6 +136,16 @@ namespace Consultoresvs3.Migrations
                     roleName
                 );
             }
+            context.UsuarioProyectos.AddOrUpdate(
+                a => a.Id,
+                new UsuarioProyecto { Id = 1, IdProyecto = 1, IdUsuario= "7f0f2511-9087-4c6b-8892-3fce893b05fb" },
+                new UsuarioProyecto { Id = 2, IdProyecto = 2, IdUsuario = "7f0f2511-9087-4c6b-8892-3fce893b05fb" }
+            );
+            context.ReporteUsuarios.AddOrUpdate(
+                a => a.Id,
+                new ReporteUsuario { Id = 1, FechaReporte = new DateTime(1996, 05, 22, 12, 00, 00),HTrabajadas=50,IdServicio= 1, IdUsuarioProyecto = 1 },
+                new ReporteUsuario { Id = 2, FechaReporte = new DateTime(1996, 05, 22, 12, 00, 00), HTrabajadas =  100, IdServicio = 1, IdUsuarioProyecto = 2 }
+            );
         }
     }
 }
