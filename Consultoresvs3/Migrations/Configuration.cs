@@ -16,7 +16,7 @@ namespace Consultoresvs3.Migrations
             ContextKey = "Consultoresvs3.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(Consultoresvs3.Models.ApplicationDbContext context)
+        /*protected override void Seed(Consultoresvs3.Models.ApplicationDbContext context)
         {
             context.Servicios.AddOrUpdate(
                 a => a.Id,
@@ -146,6 +146,6 @@ namespace Consultoresvs3.Migrations
                 new ReporteUsuario { Id = 1, FechaReporte = new DateTime(1996, 05, 22, 12, 00, 00),HTrabajadas=50,IdServicio= 1, IdUsuarioProyecto = 1 },
                 new ReporteUsuario { Id = 2, FechaReporte = new DateTime(1996, 05, 22, 12, 00, 00), HTrabajadas =  100, IdServicio = 1, IdUsuarioProyecto = 2 }
             );
-        }
+        }*/
     }
 }

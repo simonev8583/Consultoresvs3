@@ -188,27 +188,16 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccionesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\EstadoProyectosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProyectosController.cs" />
-    <Compile Include="Controllers\ReporteProyectosController.cs" />
-    <Compile Include="Controllers\ReporteUsuariosController.cs" />
+    <Compile Include="Controllers\ReporteProyectoesController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
-    <Compile Include="Controllers\UsuarioProyectosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708161434308_InitialCreate.cs" />
-    <Compile Include="Migrations\201708161434308_InitialCreate.Designer.cs">
-      <DependentUpon>201708161434308_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708161445310_First Migration.cs" />
-    <Compile Include="Migrations\201708161445310_First Migration.Designer.cs">
-      <DependentUpon>201708161445310_First Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -220,7 +209,6 @@
     <Compile Include="Models\ReporteProyecto.cs" />
     <Compile Include="Models\ReporteUsuario.cs" />
     <Compile Include="Models\Servicio.cs" />
-    <Compile Include="Models\UsuarioProyecto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -388,49 +376,30 @@
     <Content Include="Views\EstadoProyectos\Details.cshtml" />
     <Content Include="Views\EstadoProyectos\Edit.cshtml" />
     <Content Include="Views\EstadoProyectos\Index.cshtml" />
+    <Content Include="Views\ReporteProyectoes\Create.cshtml" />
+    <Content Include="Views\ReporteProyectoes\Delete.cshtml" />
+    <Content Include="Views\ReporteProyectoes\Details.cshtml" />
+    <Content Include="Views\ReporteProyectoes\Edit.cshtml" />
+    <Content Include="Views\ReporteProyectoes\Index.cshtml" />
     <Content Include="Views\Proyectos\Create.cshtml" />
     <Content Include="Views\Proyectos\Delete.cshtml" />
     <Content Include="Views\Proyectos\Details.cshtml" />
     <Content Include="Views\Proyectos\Edit.cshtml" />
     <Content Include="Views\Proyectos\Index.cshtml" />
-    <Content Include="Views\ReporteProyectos\Create.cshtml" />
-    <Content Include="Views\ReporteProyectos\Delete.cshtml" />
-    <Content Include="Views\ReporteProyectos\Details.cshtml" />
-    <Content Include="Views\ReporteProyectos\Edit.cshtml" />
-    <Content Include="Views\ReporteProyectos\Index.cshtml" />
-    <Content Include="Views\ReporteUsuarios\Create.cshtml" />
-    <Content Include="Views\ReporteUsuarios\Delete.cshtml" />
-    <Content Include="Views\ReporteUsuarios\Details.cshtml" />
-    <Content Include="Views\ReporteUsuarios\Edit.cshtml" />
-    <Content Include="Views\ReporteUsuarios\Index.cshtml" />
     <Content Include="Views\Servicios\Create.cshtml" />
     <Content Include="Views\Servicios\Delete.cshtml" />
     <Content Include="Views\Servicios\Details.cshtml" />
     <Content Include="Views\Servicios\Edit.cshtml" />
     <Content Include="Views\Servicios\Index.cshtml" />
-    <Content Include="Views\UsuarioProyectos\Create.cshtml" />
-    <Content Include="Views\UsuarioProyectos\Delete.cshtml" />
-    <Content Include="Views\UsuarioProyectos\Details.cshtml" />
-    <Content Include="Views\UsuarioProyectos\Edit.cshtml" />
-    <Content Include="Views\UsuarioProyectos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Acciones\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708161434308_InitialCreate.resx">
-      <DependentUpon>201708161434308_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708161445310_First Migration.resx">
-      <DependentUpon>201708161445310_First Migration.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -10,18 +10,18 @@ using Consultoresvs3.Models;
 
 namespace Consultoresvs3.Controllers
 {
-    public class ReporteProyectosController : Controller
+    public class ReporteProyectoesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: ReporteProyectos
+        // GET: ReporteProyectoes
         public ActionResult Index()
         {
             var reporteProyectos = db.ReporteProyectos.Include(r => r.Proyecto);
             return View(reporteProyectos.ToList());
         }
 
-        // GET: ReporteProyectos/Details/5
+        // GET: ReporteProyectoes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,14 +36,14 @@ namespace Consultoresvs3.Controllers
             return View(reporteProyecto);
         }
 
-        // GET: ReporteProyectos/Create
+        // GET: ReporteProyectoes/Create
         public ActionResult Create()
         {
             ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre");
             return View();
         }
 
-        // POST: ReporteProyectos/Create
+        // POST: ReporteProyectoes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -61,7 +61,7 @@ namespace Consultoresvs3.Controllers
             return View(reporteProyecto);
         }
 
-        // GET: ReporteProyectos/Edit/5
+        // GET: ReporteProyectoes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,7 +77,7 @@ namespace Consultoresvs3.Controllers
             return View(reporteProyecto);
         }
 
-        // POST: ReporteProyectos/Edit/5
+        // POST: ReporteProyectoes/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -93,7 +93,8 @@ namespace Consultoresvs3.Controllers
             ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre", reporteProyecto.IdProyecto);
             return View(reporteProyecto);
         }
-        // GET: ReporteProyectos/Delete/5
+
+        // GET: ReporteProyectoes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,7 +109,7 @@ namespace Consultoresvs3.Controllers
             return View(reporteProyecto);
         }
 
-        // POST: ReporteProyectos/Delete/5
+        // POST: ReporteProyectoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -126,30 +127,6 @@ namespace Consultoresvs3.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        // Se crea el reporte de proyecto 
-        public ActionResult ReporteProyecto(int id)
-        {
-            int horasTrabajadas = 0;
-            var listamatriculas = db.UsuarioProyectos.Where(t => t.IdProyecto == id).ToList();
-            for (int i = 0; i < listamatriculas.Count; i++)
-            {
-                var l = listamatriculas[i];
-                var reportesproyectos = db.ReporteUsuarios.Where(t => t.IdUsuarioProyecto == l.Id).ToList();
-                for (int j = 0; j < reportesproyectos.Count; j++)
-                {
-                    horasTrabajadas += reportesproyectos[j].HTrabajadas;
-                }
-            }
-            ReporteProyecto reporte = new ReporteProyecto();
-            reporte.HorasInvertidas = horasTrabajadas;
-            Proyecto proyecto = db.Proyectos.Find(id);
-            reporte.IdProyecto = proyecto.Id;
-            reporte.Proyecto = proyecto;
-            reporte.Utilidad = proyecto.TiempoEstipulado - horasTrabajadas;
-            db.ReporteProyectos.Add(reporte);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
     }
 }

@@ -20,12 +20,19 @@ namespace Consultoresvs3.Models
         [Display(Name = "Horas Trabajadas")]
         public int HTrabajadas { get; set; }
         public int IdServicio { get; set; }
-        public int IdUsuarioProyecto { get; set; }
 
         [ForeignKey("IdServicio")]
         public Servicio Servicio { get; set; }
+        [Display(Name = "Proyecto")]
+        public int IdProyecto { get; set; }
 
-        [ForeignKey("IdUsuarioProyecto")]
-        public virtual UsuarioProyecto Usuarioproyecto { get; set; }
+        [ForeignKey("IdProyecto")]
+        public virtual Proyecto Proyecto { get; set; }
+        
+        // Relacion con usuario
+        [Display(Name = "Usuario")]
+        public string IdUsuario { get; set; }
+        [ForeignKey("IdUsuario")]
+        public virtual ApplicationUser Usuario { get; set; }
     }
 }

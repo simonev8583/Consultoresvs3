@@ -45,7 +45,6 @@ namespace Consultoresvs3.Models
         public DbSet<ReporteProyecto> ReporteProyectos { get; set; }
         public DbSet<ReporteUsuario> ReporteUsuarios { get; set; }
         public DbSet<Servicio> Servicios { get; set; }
-        public DbSet<UsuarioProyecto> UsuarioProyectos{ get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

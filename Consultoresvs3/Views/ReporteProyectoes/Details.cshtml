@@ -1,4 +1,4 @@
-﻿@model Consultoresvs3.Models.UsuarioProyecto
+﻿@model Consultoresvs3.Models.ReporteProyecto
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>UsuarioProyecto</h4>
+    <h4>ReporteProyecto</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,11 +19,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Usuario.Nombre)
+            @Html.DisplayNameFor(model => model.HorasInvertidas)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Usuario.Nombre)
+            @Html.DisplayFor(model => model.HorasInvertidas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Utilidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Utilidad)
         </dd>
 
     </dl>

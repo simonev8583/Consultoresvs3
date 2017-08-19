@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Consultoresvs3.Models.ReporteProyecto>
 
 @{
-    ViewBag.Title = "Reporte de Proyectos";
+    ViewBag.Title = "Index";
 }
 
-<h2>Reporte de Proyectos</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Agregar Reporte", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -35,9 +35,9 @@
             @Html.DisplayFor(modelItem => item.Utilidad)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

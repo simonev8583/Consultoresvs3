@@ -1,4 +1,4 @@
-﻿@model Consultoresvs3.Models.UsuarioProyecto
+﻿@model Consultoresvs3.Models.ReporteProyecto
 
 @{
     ViewBag.Title = "Edit";
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>UsuarioProyecto</h4>
+        <h4>ReporteProyecto</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -26,10 +26,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdUsuario, "IdUsuario", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.HorasInvertidas, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("IdUsuario", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.HorasInvertidas, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HorasInvertidas, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Utilidad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Utilidad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Utilidad, "", new { @class = "text-danger" })
             </div>
         </div>
 
