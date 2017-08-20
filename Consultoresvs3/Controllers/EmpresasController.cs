@@ -10,6 +10,7 @@ using Consultoresvs3.Models;
 
 namespace Consultoresvs3.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class EmpresasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -45,6 +46,7 @@ namespace Consultoresvs3.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,NIT,NombreEmpresa,Direccion,CorreoEmpresa,ActividadEconomica,Telefono,NombreRepLegal,IdentificacionRepLegal,NombreRepSuplente,IdentificacionRepSuplente,NombreJuntaDir1,IdentificacionJuntaDir1,NombreJuntaDir2,IdentificacionJuntaDir2,NombreJuntaDir3,IdentificacionJuntaDir3,NombreJuntaDir4,IdentificacionJuntaDir4,NombreJuntaDir5,IdentificacionJuntaDir5,NombreJuntaDir6,IdentificacionJuntaDir6,NombreJuntaDir7,IdentificacionJuntaDir7,NombreJuntaDir8,IdentificacionJuntaDir8,NombreJuntaDir9,IdentificacionJuntaDir9,NombreJuntaDir10,IdentificacionJuntaDir10")] Empresa empresa)
         {
