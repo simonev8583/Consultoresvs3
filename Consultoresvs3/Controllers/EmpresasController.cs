@@ -15,12 +15,14 @@ namespace Consultoresvs3.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Empresas
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Empresas.ToList());
         }
 
         // GET: Empresas/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace Consultoresvs3.Controllers
         }
 
         // GET: Empresas/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +62,7 @@ namespace Consultoresvs3.Controllers
         }
 
         // GET: Empresas/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +94,7 @@ namespace Consultoresvs3.Controllers
         }
 
         // GET: Empresas/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
