@@ -9,6 +9,12 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<div class="form-group">
+    <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoEmp/")">Consultar Proyecto Empleado</a>
+</div>
+<div class="form-group">
+    <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoAdm/")">Consultar Proyecto Admin</a>
+</div>
 <table class="table">
     <tr>
         <th>
@@ -16,9 +22,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Servicio.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario.Nombre)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FechaReporte)
@@ -38,9 +41,6 @@
             @Html.DisplayFor(modelItem => item.Servicio.Nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Usuario.Nombre)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.FechaReporte)
         </td>
         <td>
@@ -53,5 +53,23 @@
         </td>
     </tr>
 }
-
 </table>
+<div id="filtro">
+
+</div>
+
+@section scripts {
+    <script>
+       $('body').on('click', '[data-url]', function () {
+           $.ajax({
+               method: 'POST',
+               url: $(this).data('url')
+           })
+           .done(function (data) {
+               $('#filtro').hide();
+               $('#filtro').html(data);
+               $('#filtro').show('fast');
+           });
+       })
+    </script>
+}
