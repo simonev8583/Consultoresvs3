@@ -15,6 +15,7 @@ namespace Consultoresvs3.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ReporteProyectoes
+        [Authorize]
         public ActionResult Index()
         {
             var reporteProyectos = db.ReporteProyectos.Include(r => r.Proyecto);
@@ -22,6 +23,7 @@ namespace Consultoresvs3.Controllers
         }
 
         // GET: ReporteProyectoes/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace Consultoresvs3.Controllers
         }
 
         // GET: ReporteProyectoes/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre");
@@ -62,6 +65,7 @@ namespace Consultoresvs3.Controllers
         }
 
         // GET: ReporteProyectoes/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +99,7 @@ namespace Consultoresvs3.Controllers
         }
 
         // GET: ReporteProyectoes/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -128,6 +133,7 @@ namespace Consultoresvs3.Controllers
             }
             base.Dispose(disposing);
         }
+
         public ActionResult CrearReporte(int id)
         {
             var reporte = db.ReporteUsuarios.Where(t => t.Proyecto.Id == id).ToList();

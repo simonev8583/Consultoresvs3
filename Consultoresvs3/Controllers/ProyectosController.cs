@@ -15,6 +15,7 @@ namespace Consultoresvs3.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Proyectos
+        [Authorize]
         public ActionResult Index()
         {
             var proyectos = db.Proyectos.Include(p => p.Empresa).Include(p => p.Estado);
@@ -22,6 +23,7 @@ namespace Consultoresvs3.Controllers
         }
 
         // GET: Proyectos/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace Consultoresvs3.Controllers
         }
 
         // GET: Proyectos/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.IdEmpresa = new SelectList(db.Empresas, "Id", "NombreEmpresa");
@@ -64,6 +67,7 @@ namespace Consultoresvs3.Controllers
         }
 
         // GET: Proyectos/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,6 +103,7 @@ namespace Consultoresvs3.Controllers
         }
 
         // GET: Proyectos/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
