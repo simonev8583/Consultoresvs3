@@ -138,13 +138,12 @@ namespace Consultoresvs3.Controllers
             return RedirectToAction("Index");
         }
         // Queremos mostrar la informacion que tiene cada empleado según un proyecto en especial.
-        public ActionResult FiltroProyectoEmp(int? idProyecto)
+        public ActionResult FiltroProyectoEmp(int idProyecto)
         {
             string idusuario = User.Identity.GetUserId();
             //var Reporte = db.ReporteUsuarios.Where(r=> r.IdUsuario.Equals(idusuario) && r.IdProyecto.Equals(idProyecto)).Include(r=>r.Servicio);
             var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario) && r.IdProyecto ==1).Include(r=>r.Servicio);
-            //ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
-            ViewBag.ProyectoId = db.Proyectos.Find(1);
+            ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
             return PartialView("_FiltroProyectoemp", Reporte);
         }
         public ActionResult FiltroProyectoAdm(int ? idProyecto)
