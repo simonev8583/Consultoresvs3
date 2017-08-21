@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Consultoresvs3.Models;
 using Microsoft.AspNet.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Consultoresvs3.Controllers
 {
@@ -25,7 +26,7 @@ namespace Consultoresvs3.Controllers
             // Es para el dropdown del empleado actual (debe traer los proyectos en los que se encuentra).... lo hace pero...
             // Los esta trayendo con reportes asi que si genera un reporte 20 veces de la misma empresa va a poner 20 de esos
             // cuadrar si se le ocurre algo....
-           ViewBag.ProyectosUsuario = new SelectList(db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)), "Id", "Proyecto.Nombre");
+           ViewBag.idProyecto = new SelectList(db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)), "Proyecto.Id", "Proyecto.Nombre");
             var reporte_Empleados = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
             return View(reporte_Empleados.ToList().OrderByDescending(r => r.FechaReporte));
             
@@ -143,13 +144,14 @@ namespace Consultoresvs3.Controllers
             return RedirectToAction("Index");
         }
         // Queremos mostrar la informacion que tiene cada empleado según un proyecto en especial.
+        [HttpPost]
         public ActionResult FiltroProyectoEmp(int? idProyecto)
         {
             string idusuario = User.Identity.GetUserId();
             //var Reporte = db.ReporteUsuarios.Where(r=> r.IdUsuario.Equals(idusuario) && r.IdProyecto.Equals(idProyecto)).Include(r=>r.Servicio);
-            var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario) && r.IdProyecto ==1).Include(r=>r.Servicio);
+            var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario) && r.IdProyecto == idProyecto).Include(r=>r.Servicio);
             //ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
-            ViewBag.ProyectoId = db.Proyectos.Find(1);
+            ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
             return PartialView("_FiltroProyectoemp", Reporte);
         }
         public ActionResult FiltroProyectoAdm(int ? idProyecto)
