@@ -149,10 +149,16 @@ namespace Consultoresvs3.Controllers
         }
         public ActionResult FiltroProyectoAdm(int ? idProyecto)
         {
-            var Reporte =db.ReporteUsuarios.Where(r=> r.IdProyecto ==1).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
-            //ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
-            ViewBag.ProyectoId = db.Proyectos.Find(1);
+           // var Reporte =db.ReporteUsuarios.Where(r=> r.IdProyecto ==1).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
+            var Reporte = db.ReporteUsuarios.Where(r => r.IdProyecto == idProyecto).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
+            ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
+            //ViewBag.ProyectoId = db.Proyectos.Find(1);
             return PartialView("_FiltroProyectoadm", Reporte);
+        }
+        public ActionResult FiltroReporteUFechaEmp(int? mes,int? año)
+        {
+            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month.Equals(mes) && r.FechaReporte.Year.Equals(año));
+            return PartialView("_FiltroReporteUFechaemp", Reporte);
         }
         protected override void Dispose(bool disposing)
         {
