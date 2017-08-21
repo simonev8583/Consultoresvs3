@@ -53,7 +53,6 @@ namespace Consultoresvs3.Controllers
         {
             ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre");
             ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre");
-            ViewBag.IdUsuario = new SelectList(db.Users, "Id", "Nombre");
             return View();
         }
 
@@ -74,7 +73,6 @@ namespace Consultoresvs3.Controllers
 
             ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre", reporteUsuario.IdProyecto);
             ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre", reporteUsuario.IdServicio);
-            ViewBag.IdUsuario = new SelectList(db.Users, "Id", "Nombre", reporteUsuario.IdUsuario);
             return View(reporteUsuario);
         }
 
@@ -148,8 +146,8 @@ namespace Consultoresvs3.Controllers
             string idusuario = User.Identity.GetUserId();
             //var Reporte = db.ReporteUsuarios.Where(r=> r.IdUsuario.Equals(idusuario) && r.IdProyecto.Equals(idProyecto)).Include(r=>r.Servicio);
             var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario) && r.IdProyecto ==1).Include(r=>r.Servicio);
-            //ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
-            ViewBag.ProyectoId = db.Proyectos.Find(1);
+            ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
+            //ViewBag.ProyectoId = db.Proyectos.Find(1);
             return PartialView("_FiltroProyectoemp", Reporte);
         }
         public ActionResult FiltroProyectoAdm(int ? idProyecto)
