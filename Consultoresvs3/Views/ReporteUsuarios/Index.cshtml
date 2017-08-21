@@ -19,30 +19,42 @@
             @Html.DropDownList("idProyecto", null, htmlAttributes: new { @class = "form-control" })
 
         </div>
-    </div>
+    </div>   
+</form>
 
+@if (User.IsInRole("ADMIN"))
+{
+    <div class="form-group">
+        <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoAdm/")">Consultar Proyecto Admin</a>
+    </div>
+    <div class="form-group">
+        <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaAdm/")">Consultar Reporte U Fecha Admin</a>
+    </div>
+}
+else
+{
     <div class="form-group">
         <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoEmp/")">Consultar Proyecto Empleado</a>
     </div>
-</form>
+    <div class="form-group">
+        <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaEmp/")">Consultar Reporte U Fecha Empleado</a>
+    </div>
+    <div class="form-group">
+        <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteServicioEmp/")">Consultar Reporte T Servicio Empleado</a>
+    </div>
+}
 
-<div class="form-group">
-    <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoAdm/")">Consultar Proyecto Admin</a>
-</div>
-<div class="form-group">
-    <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaEmp/")">Consultar Reporte U Fecha Empleado</a>
-</div>
-<div class="form-group">
-    <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaAdm/")">Consultar Reporte U Fecha Admin</a>
-</div>
-<div class="form-group">
-    <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteServicioEmp/")">Consultar Reporte T Servicio Empleado</a>
-</div>
 <table class="table" id="filtro">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Proyecto.Nombre)
         </th>
+        @if (User.IsInRole("ADMIN"))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario.Nombre)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.Servicio.Nombre)
         </th>
@@ -60,6 +72,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
         </td>
+        @if (User.IsInRole("ADMIN"))
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+            </td>
+        }
         <td>
             @Html.DisplayFor(modelItem => item.Servicio.Nombre)
         </td>
