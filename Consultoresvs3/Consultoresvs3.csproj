@@ -403,6 +403,9 @@
     <Content Include="Views\ReporteUsuarios\Index.cshtml" />
     <Content Include="Views\ReporteUsuarios\_FiltroProyectoemp.cshtml" />
     <Content Include="Views\ReporteUsuarios\_FiltroProyectoadm.cshtml" />
+    <Content Include="Views\ReporteUsuarios\_FiltroReporteUFechaemp.cshtml" />
+    <Content Include="Views\ReporteUsuarios\_FiltroReporteUFechaadm.cshtml" />
+    <Content Include="Views\ReporteUsuarios\_FiltroReporteServicioemp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

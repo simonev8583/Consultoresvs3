@@ -10,14 +10,6 @@
     @Html.ActionLink("Agregar Reporte", "Create")
 </p>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            <a class="btn btn-primary" data-url="@Url.Content(string.Format("/ReporteUsuarios/FiltroProyectoEmp/{0}",item.Proyecto.Id))">@item.Proyecto.Id</a>
-        </td>
-    </tr>
-}
 
 <br /><br /><br />
 
@@ -26,6 +18,15 @@
 </div>
 <div class="form-group">
     <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoAdm/")">Consultar Proyecto Admin</a>
+</div>
+<div class="form-group">
+    <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaEmp/")">Consultar Reporte U Fecha Empleado</a>
+</div>
+<div class="form-group">
+    <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaAdm/")">Consultar Reporte U Fecha Admin</a>
+</div>
+<div class="form-group">
+    <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteServicioEmp/")">Consultar Reporte T Servicio Empleado</a>
 </div>
 <table class="table" id="filtro">
     <tr>
