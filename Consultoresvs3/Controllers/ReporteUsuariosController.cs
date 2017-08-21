@@ -21,6 +21,11 @@ namespace Consultoresvs3.Controllers
         public ActionResult Index()
         {
             string idusuario = User.Identity.GetUserId();
+
+            // Es para el dropdown del empleado actual (debe traer los proyectos en los que se encuentra).... lo hace pero...
+            // Los esta trayendo con reportes asi que si genera un reporte 20 veces de la misma empresa va a poner 20 de esos
+            // cuadrar si se le ocurre algo....
+           ViewBag.ProyectosUsuario = new SelectList(db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)), "Id", "Proyecto.Nombre");
             var reporte_Empleados = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
             return View(reporte_Empleados.ToList().OrderByDescending(r => r.FechaReporte));
             
@@ -174,7 +179,7 @@ namespace Consultoresvs3.Controllers
         {
             string idusuario = User.Identity.GetUserId();
             //var Reporte = db.ReporteUsuarios.Where(r => r.IdServicio == idservicio && r.IdUsuario.Equals(idusuario)).Include(r => r.Proyecto);
-            var Reporte = db.ReporteUsuarios.Where(r => r.IdServicio == 1 && r.IdUsuario.Equals(idusuario)).Include(r => r.Proyecto);
+            var Reporte = db.ReporteUsuarios.Where(r => r.IdServicio == 1 && r.IdUsuario.Equals(idusuario)).Include(r => r.Proyecto.Empresa);
             return PartialView("_FiltroReporteServicioemp", Reporte);
         }
         protected override void Dispose(bool disposing)
