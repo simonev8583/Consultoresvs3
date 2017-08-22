@@ -35,7 +35,7 @@ namespace Consultoresvs3.Controllers
             }
             else
             {
-                ViewBag.idProyecto = new SelectList(db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)), "Id", "Proyecto.Nombre");
+                ViewBag.idProyecto = new SelectList(db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)), "Proyecto.Id", "Proyecto.Nombre");
                 var reporte_Empleados = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
                 return View(reporte_Empleados.ToList().OrderByDescending(r => r.FechaReporte));
             }
@@ -167,24 +167,24 @@ namespace Consultoresvs3.Controllers
         }
         public ActionResult FiltroProyectoAdm(int ? idProyecto)
         {
-            var Reporte =db.ReporteUsuarios.Where(r=> r.IdProyecto ==1).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
+            var Reporte =db.ReporteUsuarios.Where(r=> r.IdProyecto == idProyecto).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
             //var Reporte = db.ReporteUsuarios.Where(r => r.IdProyecto == idProyecto).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
             //ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
-            ViewBag.ProyectoId = db.Proyectos.Find(1);
+            ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
             return PartialView("_FiltroProyectoadm", Reporte);
         }
         public ActionResult FiltroReporteUFechaEmp(int? mes,int? año)
         {
             string idusuario = User.Identity.GetUserId();
             // var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month.Equals(mes) && r.FechaReporte.Year.Equals(año) && r.IdUsuario.Equals(idusuario));
-            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month == 08 && r.FechaReporte.Year ==2017 && r.IdUsuario.Equals(idusuario))
+            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month == mes && r.FechaReporte.Year == año && r.IdUsuario.Equals(idusuario))
                 .Include(r => r.Proyecto).Include(r => r.Servicio);
             return PartialView("_FiltroReporteUFechaemp", Reporte);
         }
         public ActionResult FiltroReporteUFechaAdm(int? mes, int? año)
         {
             // var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month.Equals(mes) && r.FechaReporte.Year.Equals(año));
-            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month.Equals(08) && r.FechaReporte.Year.Equals(2017)).Include(r => r.Usuario)
+            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month.Equals(mes) && r.FechaReporte.Year.Equals(año)).Include(r => r.Usuario)
                 .Include(r => r.Proyecto).Include(r => r.Servicio);
             return PartialView("_FiltroReporteUFechaadm", Reporte);
         }
