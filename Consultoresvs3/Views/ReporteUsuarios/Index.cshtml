@@ -20,42 +20,51 @@
 
         </div>
     </div>   
+    @if (User.IsInRole("ADMIN"))
+    {
+        <div class="form-group">
+            <a class="btn btn-primary proyect" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoAdm/")">Consultar Proyecto Admin</a>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <a class="btn btn-primary proyect" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoEmp/")">Consultar Proyecto Empleado</a>
+        </div>
+        <div class="form-group">
+            <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteServicioEmp/")">Consultar Reporte T Servicio Empleado</a>
+        </div>
+    }
 </form>
 
-@if (User.IsInRole("ADMIN"))
-{
+<!--filtro para la fecha-->
+<form id="date">
     <div class="form-group">
-        <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoAdm/")">Consultar Proyecto Admin</a>
+        <input type="text" id="mes"/>
+        <input type="text" id="año" />
     </div>
-    <div class="form-group">
-        <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaAdm/")">Consultar Reporte U Fecha Admin</a>
-    </div>
-    <div class="form-group">
-        <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteServicioAdm/")">Consultar Reporte T Servicio Admin</a>
-    </div>
-}
-else
-{
-    <div class="form-group">
-        <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoEmp/")">Consultar Proyecto Empleado</a>
-    </div>
-    <div class="form-group">
-        <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaEmp/")">Consultar Reporte U Fecha Empleado</a>
-    </div>
-    <div class="form-group">
-        <a class="btn btn-primary" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteServicioEmp/")">Consultar Reporte T Servicio Empleado</a>
-    </div>
-}
-
+    @if (User.IsInRole("ADMIN"))
+    {
+        <div class="form-group">
+            <a class="btn btn-primary fecha" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaAdm/")">Consultar Reporte U Fecha Admin</a>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <a class="btn btn-primary fecha" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaEmp/")">Consultar Reporte U Fecha Empleado</a>
+        </div>
+    }
+</form>
 <table class="table" id="filtro">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Proyecto.Nombre)
+            Proyecto
         </th>
         @if (User.IsInRole("ADMIN"))
         {
             <th>
-                @Html.DisplayNameFor(model => model.Usuario.Nombre)
+                Usuario
             </th>
         }
         <th>
@@ -101,19 +110,38 @@ else
 
 @section scripts {
     <script>
-        $('body').on('click', '[data-url]', function () {
-           $.ajax({
-               method: 'POST',
-               url: $(this).data('url'),
-               data:$('#f').serialize()
-           })
-           .done(function (data) {
-               $('#filtro').hide();
-               $('#filtro').html(data);
-               $('#filtro').show('fast');
-               }).fail(function () {
-                   alert("error");
-               });
-       })
+           $(document).ready(function () {
+                    $('.proyect').click(function () {
+                        $.ajax({
+                            method: 'POST',
+                            url: $(this).data('url'),
+                            data: $('#f').serialize()
+                        })
+                            .done(function (data) {
+                                $('#filtro').hide();
+                                $('#filtro').html(data);
+                                $('#filtro').show('fast');
+                            }).fail(function () {
+                                alert("error");
+                         });
+            });
+               //filtro por fecha
+                    $('.fecha').click(function () {
+                        var mes = $('#mes').val();
+                        var año = $('#año').val();
+                        $.ajax({
+                            method: 'POST',
+                            url: $(this).data('url'),
+                            data: { mes: mes, año: año }
+                        })
+                            .done(function (data) {
+                                $('#filtro').hide();
+                                $('#filtro').html(data);
+                                $('#filtro').show('fast');
+                            }).fail(function () {
+                                alert("error");
+                            });
+                    });
+            });
     </script>
 }
