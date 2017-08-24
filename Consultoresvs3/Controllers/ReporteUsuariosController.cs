@@ -35,8 +35,12 @@ namespace Consultoresvs3.Controllers
             }
             else
             {
+               /* var rep = (from up in db.ReporteUsuarios join p in db.Proyectos on up.IdProyecto equals p.Id where p.Id == up.IdProyecto
+                           select new { p.Id,p.Nombre});
+                ViewBag.idProyecto = new SelectList(rep, "Id", "Nombre");*/
                 ViewBag.idProyecto = new SelectList(db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)), "Id", "Proyecto.Nombre");
-                var reporte_Empleados = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
+
+                var reporte_Empleados = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);              
                 return View(reporte_Empleados.ToList().OrderByDescending(r => r.FechaReporte));
             }
             /*ViewBag.idProyecto = new SelectList(db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)), "Proyecto.Id", "Proyecto.Nombre");
@@ -194,6 +198,12 @@ namespace Consultoresvs3.Controllers
             //var Reporte = db.ReporteUsuarios.Where(r => r.IdServicio == idservicio && r.IdUsuario.Equals(idusuario)).Include(r => r.Proyecto);
             var Reporte = db.ReporteUsuarios.Where(r => r.IdServicio == 1 && r.IdUsuario.Equals(idusuario)).Include(r => r.Proyecto.Empresa);
             return PartialView("_FiltroReporteServicioemp", Reporte);
+        }
+        public ActionResult FiltroReporteServicioAdm(int? idservicio)
+        {
+            //var Reporte = db.ReporteUsuarios.Where(r => r.IdServicio == idservicio).Include(r => r.Proyecto).Include(r => r.Usuario).Include(r => r.Proyecto.Empresa).Include(r => r.Servicio);
+            var Reporte = db.ReporteUsuarios.Where(r => r.IdServicio == 2).Include(r => r.Proyecto).Include(r => r.Usuario).Include(r => r.Proyecto.Empresa).Include(r => r.Servicio);
+            return PartialView("_FiltroReporteServicioeadm", Reporte);
         }
         protected override void Dispose(bool disposing)
         {
