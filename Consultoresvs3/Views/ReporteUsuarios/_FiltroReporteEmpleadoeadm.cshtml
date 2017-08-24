@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Consultoresvs3.Models.ReporteUsuario>
+
+<div id="NombreProyecto">
+    <h4> nombre Usuario</h4>
+    <h5>@ViewBag.UsuarioId</h5>
+
+
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+
+            <th>
+                <h7>Fecha</h7>
+            </th>
+            <th>
+                <h7>Proyecto</h7>
+            </th>
+            <th>
+                <h7>Empresa</h7>
+            </th>
+            <th>
+                <h7>Servicio</h7>
+            </th>
+            <th>
+                <h7>Horas Trabajadas</h7>
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaReporte.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proyecto.Empresa.NombreEmpresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Servicio.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HTrabajadas)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+

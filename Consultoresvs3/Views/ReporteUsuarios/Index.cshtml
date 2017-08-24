@@ -14,16 +14,31 @@
 <br /><br /><br />
 <form id="f">
     <div class="form-group">
-        <label class="control-label col-md-2" for="ProyectosUsuario">Servicio</label>
+        <label class="control-label col-md-2" for="ProyectosUsuario">Proyectos</label>
         <div class="col-md-10">
             @Html.DropDownList("idProyecto", null, htmlAttributes: new { @class = "form-control" })
-
         </div>
     </div>   
+    <p>//////////////////////////////////</p>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="ProyectosUsuario">Servicios</label>
+        <div class="col-md-10">
+            @Html.DropDownList("idServicio", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>  
     @if (User.IsInRole("ADMIN"))
     {
         <div class="form-group">
             <a class="btn btn-primary proyect" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoAdm/")">Consultar Proyecto Admin</a>
+        </div>
+        <div class="form-group">
+            <a class="btn btn-primary proyect" data-url="@Url.Content("/ReporteUsuarios/FiltroEmpleadoAdm/")">Consultar Empleado Admin</a>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ProyectosUsuario">Empleados</label>
+            <div class="col-md-10">
+                @Html.DropDownList("UsuarioId", null, htmlAttributes: new { @class = "form-control" })
+            </div>
         </div>
     }
     else
