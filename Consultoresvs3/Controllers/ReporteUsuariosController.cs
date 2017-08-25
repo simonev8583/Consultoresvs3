@@ -36,9 +36,15 @@ namespace Consultoresvs3.Controllers
                 return View(reporte_Empleados.ToList().OrderByDescending(r => r.FechaReporte));
             }
             else
-            {
+            {/*SELECT * 
+                FROM proyectos join usuariop
+                where proyectos.Idp = usuariop.Idp and usuariop.Idu=1 
+                group by proyectos.Idp;*/
+                var repo = from p in db.Proyectos join up in db.ReporteUsuarios on p.Id equals up.IdProyecto
+                            where up.IdUsuario.Equals(idusuario) group  p by p.Id;
                 ViewBag.idServicio = new SelectList(db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)), "Servicio.Id", "Servicio.Nombre");
-                ViewBag.idProyecto = new SelectList(db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)), "Proyecto.Id", "Proyecto.Nombre");
+                ViewBag.idProyecto = new SelectList(repo);
+                //ViewBag.idProyecto = new SelectList(db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)), "Proyecto.Id", "Proyecto.Nombre");
                 var reporte_Empleados = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
                 return View(reporte_Empleados.ToList().OrderByDescending(r => r.FechaReporte));
             }
