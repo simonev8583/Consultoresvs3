@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -36,8 +37,17 @@ namespace Consultoresvs3.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ActualizarUsuario(int identidad,double salario,double valorhorasp,double valorhorasnp)
+        public ActionResult ActualizarUsuario(int? identidad,double salario,double valorhorasp,double valorhorasnp)
         {
+            if (identidad == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user=db.Users.Where(t => t.Identificacion == identidad).First();
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
             db.Users.Where(t => t.Identificacion == identidad).First().Salario = salario;
 
             db.Users.Where(t => t.Identificacion == identidad).First().ValorHoraPrestacionesSociales = valorhorasp;
