@@ -26,5 +26,18 @@ namespace Consultoresvs3.Controllers
 
             return View();
         }
+        [HttpGet]
+        public ActionResult ActualizarUsuario()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ActualizarUsuario(int identidad,string salario,int salariohoras)
+        {
+
+
+            return View();
+        }
+
     }
 }
