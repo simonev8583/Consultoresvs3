@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Consultoresvs3.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,9 @@ namespace Consultoresvs3.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+
         public ActionResult Index()
         {
             return View();
@@ -26,5 +30,25 @@ namespace Consultoresvs3.Controllers
 
             return View();
         }
+        [HttpGet]
+        public ActionResult ActualizarUsuario()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ActualizarUsuario(int identidad,double salario,double valorhorasp,double valorhorasnp)
+        {
+            db.Users.Where(t => t.Identificacion == identidad).First().Salario = salario;
+
+            db.Users.Where(t => t.Identificacion == identidad).First().ValorHoraPrestacionesSociales = valorhorasp;
+
+            db.Users.Where(t => t.Identificacion == identidad).First().ValorHoraNoPrestacionSociales = valorhorasnp;
+
+            db.SaveChanges();
+
+
+            return View();
+        }
+
     }
 }
