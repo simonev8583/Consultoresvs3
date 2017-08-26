@@ -4,7 +4,7 @@
     ViewBag.Title = "Servicios";
 }
 
-<h2>Servicios</h2>
+<h2 style="color:#231bef;font-weight:bold;">Servicios</h2>
 
 <p>
     @Html.ActionLink("Agregar Servicio", "Create")
@@ -29,8 +29,6 @@
             @Html.DisplayFor(modelItem => item.Descripcion)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
             @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
         </td>
     </tr>
