@@ -408,6 +408,7 @@
     <Content Include="Views\ReporteUsuarios\_FiltroReporteServicioemp.cshtml" />
     <Content Include="Views\ReporteUsuarios\_FiltroReporteServicioeadm.cshtml" />
     <Content Include="Views\ReporteUsuarios\_FiltroReporteEmpleadoeadm.cshtml" />
+    <Content Include="Views\Home\ActualizarUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
