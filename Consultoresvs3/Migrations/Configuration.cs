@@ -27,9 +27,7 @@ namespace Consultoresvs3.Migrations
             context.EstadoProyectos.AddOrUpdate(
                 a => a.Id,
                 new EstadoProyecto { Id = 1, Nombre = "Ejecucion" },
-                new EstadoProyecto { Id = 2, Nombre = "Pausado" },
-                new EstadoProyecto { Id = 3, Nombre = "Finalizado" }
-
+                new EstadoProyecto { Id = 2, Nombre = "Finalizado" }
             );
 
             context.Empresas.AddOrUpdate(
@@ -79,7 +77,7 @@ namespace Consultoresvs3.Migrations
             context.Proyectos.AddOrUpdate(
                 a => a.Id,
                 new Proyecto { Id = 1, Nombre = "Ballen", Precio = 1500000, TiempoEstipulado = 200, IdEmpresa = 1, Fecha = new DateTime(1996, 05, 22, 12, 00, 00), IdEstado = 1 },
-                new Proyecto { Id = 2, Nombre = "Marqueting", Precio = 21500000, TiempoEstipulado = 400, IdEmpresa = 2, Fecha = new DateTime(1996, 12, 12, 12, 00, 00), IdEstado = 2 },
+                new Proyecto { Id = 2, Nombre = "Marqueting", Precio = 21500000, TiempoEstipulado = 400, IdEmpresa = 2, Fecha = new DateTime(1996, 12, 12, 12, 00, 00), IdEstado = 1 },
                 new Proyecto { Id = 3, Nombre = "Casanova", Precio = 12000000, TiempoEstipulado = 100, IdEmpresa = 1, Fecha = new DateTime(1996, 8, 5, 12, 00, 00), IdEstado = 1 }
             );
             // CREAR ADMINISTRADOR
