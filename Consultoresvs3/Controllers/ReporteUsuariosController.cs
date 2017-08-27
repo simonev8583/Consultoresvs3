@@ -23,13 +23,11 @@ namespace Consultoresvs3.Controllers
         {
             string idusuario = User.Identity.GetUserId();
 
-            // Es para el dropdown del empleado actual (debe traer los proyectos en los que se encuentra).... lo hace pero...
-            // Los esta trayendo con reportes asi que si genera un reporte 20 veces de la misma empresa va a poner 20 de esos
-            // cuadrar si se le ocurre algo....
-            
+            // mostrar a los empleados los proyectos en ejecucion, NO FINALIZADOS
             if (User.IsInRole("ADMIN"))
             {
-                ViewBag.idServicio = new SelectList(db.Servicios, "Id", "Nombre");
+                var rolAdmin = db.Roles.Where(r => r.Name.Equals("ADMIN"));
+                ViewBag.idEmpresa = new SelectList(db.Empresas, "Id", "NombreEmpresa");
                 ViewBag.UsuarioId = new SelectList(db.Users, "Id", "Nombre");
                 ViewBag.idProyecto = new SelectList(db.Proyectos, "Id", "Nombre");
                 var reporte_Empleados= db.ReporteUsuarios.Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
@@ -38,16 +36,25 @@ namespace Consultoresvs3.Controllers
             else
             {
                 // En este ViewBag van los proyectos en los que se encuentra el empleado logeado actualmente
-                ViewBag.idProyecto = new SelectList(from p in db.Proyectos
-                                                    join up in db.ReporteUsuarios
-                                                    on p.Id equals up.IdProyecto
-                                                    where p.Id == up.IdProyecto
-                                                    where up.IdUsuario == idusuario
-                                                    group p by new { p.Id, p.Nombre } into proyectos
-                                                    select new { proyectos.Key.Id, proyectos.Key.Nombre }, "Id", "Nombre");
-                ViewBag.idServicio = new SelectList(db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)), "Servicio.Id", "Servicio.Nombre");
-                var reporte_Empleados = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
-                return View(reporte_Empleados.ToList().OrderByDescending(r => r.FechaReporte));
+                if (db.ReporteUsuarios.Where(r=>r.IdUsuario.Equals(idusuario)).Count()<=0)
+                {
+                    var usuario = db.Users.Find(idusuario);
+                    ViewBag.Reporte = usuario.Nombre + " " + usuario.Apellido + " " + "Aun no tiene reportes";
+                    return PartialView("_Datosnulos");
+                }
+                else
+                {
+                    ViewBag.idProyecto = new SelectList(from p in db.Proyectos
+                                                        join up in db.ReporteUsuarios
+                                                        on p.Id equals up.IdProyecto
+                                                        where p.Id == up.IdProyecto
+                                                        where up.IdUsuario == idusuario
+                                                        group p by new { p.Id, p.Nombre } into proyectos
+                                                        select new { proyectos.Key.Id, proyectos.Key.Nombre }, "Id", "Nombre");
+                    var reporte_Empleados = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
+                    return View(reporte_Empleados.ToList().OrderByDescending(r => r.FechaReporte));
+                }
+                
             }
            
             
@@ -73,7 +80,8 @@ namespace Consultoresvs3.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre");
+            ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
+            //ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre");
             ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre");
             return View();
         }
@@ -93,7 +101,10 @@ namespace Consultoresvs3.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre", reporteUsuario.IdProyecto);
+            /////OJO
+            /// OJO PROBRAR IdProyecto (CREATE)
+            ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
+           // ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre", reporteUsuario.IdProyecto);
             ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre", reporteUsuario.IdServicio);
             return View(reporteUsuario);
         }
@@ -195,19 +206,11 @@ namespace Consultoresvs3.Controllers
             var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month == mes && r.FechaReporte.Year == año).Include(r => r.Usuario)
                 .Include(r => r.Proyecto).Include(r => r.Servicio);
             return PartialView("_FiltroReporteUFechaadm", Reporte);
-        }
-        public ActionResult FiltroReporteServicioEmp(int ? idservicio)
-        {
-            string idusuario = User.Identity.GetUserId();
-            //var Reporte = db.ReporteUsuarios.Where(r => r.IdServicio == idservicio && r.IdUsuario.Equals(idusuario)).Include(r => r.Proyecto);
-            var Reporte = db.ReporteUsuarios.Where(r => r.IdServicio == 1 && r.IdUsuario.Equals(idusuario)).Include(r => r.Proyecto.Empresa);
-            return PartialView("_FiltroReporteServicioemp", Reporte);
-        }
-        public ActionResult FiltroReporteServicioAdm(int? idservicio)
-        {
-            //var Reporte = db.ReporteUsuarios.Where(r => r.IdServicio == idservicio).Include(r => r.Proyecto).Include(r => r.Usuario).Include(r => r.Proyecto.Empresa).Include(r => r.Servicio);
-            var Reporte = db.ReporteUsuarios.Where(r => r.IdServicio == 2).Include(r => r.Proyecto).Include(r => r.Usuario).Include(r => r.Proyecto.Empresa).Include(r => r.Servicio);
-            return PartialView("_FiltroReporteServicioeadm", Reporte);
+        }     
+        public ActionResult FiltroEmpresaAdm(int? idempresa)
+        {            
+            var Reporte = db.ReporteUsuarios.Where(r => r.Proyecto.IdEmpresa == idempresa).Include(r => r.Proyecto).Include(r => r.Usuario).Include(r => r.Proyecto.Empresa).Include(r => r.Servicio);
+            return PartialView("_FiltroEmpresaadm", Reporte);
         }
         public ActionResult FiltroEmpleadoAdm(string idusuario)
         {
