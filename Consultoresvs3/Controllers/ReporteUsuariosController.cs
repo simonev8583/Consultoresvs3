@@ -26,14 +26,11 @@ namespace Consultoresvs3.Controllers
             // mostrar a los empleados los proyectos en ejecucion, NO FINALIZADOS
             if (User.IsInRole("ADMIN"))
             {
-                var rolAdmin = db.Roles.Where(r => r.Name.Equals("ADMIN"));
-                ViewBag.idEmpresa = new SelectList(db.Empresas, "Id", "NombreEmpresa");
-
+                ViewBag.idEmpresa = new SelectList(db.Empresas, "Id", "NombreEmpresa");            
                 // traer a todos los usuarios, menos al administrador
-
-                //var usuarios= 
-
-                ViewBag.UsuarioId = new SelectList(db.Users, "Id", "Nombre");
+                ViewBag.UsuarioId = new SelectList(from u in db.Users
+                                                   where u.Id != idusuario
+                                                   select new { Id = u.Id, Nombre = u.Nombre + " " + u.Apellido }, "Id", "Nombre");
                 ViewBag.idProyecto = new SelectList(db.Proyectos, "Id", "Nombre");
                 var reporte_Empleados= db.ReporteUsuarios.Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
                 return View(reporte_Empleados.ToList().OrderByDescending(r => r.FechaReporte));
@@ -42,7 +39,7 @@ namespace Consultoresvs3.Controllers
             {
                 // En este ViewBag van los proyectos en los que se encuentra el empleado logeado actualmente
                 if (db.ReporteUsuarios.Where(r=>r.IdUsuario.Equals(idusuario)).Count()<=0)
-                {
+                {//CAMBIAR RETURN ES SOLO CREATE
                     return RedirectToAction("Create");
                 }
                 else
@@ -84,7 +81,6 @@ namespace Consultoresvs3.Controllers
         public ActionResult Create()
         {
             ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
-            //ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre");
             ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre");
             return View();
         }
@@ -104,8 +100,6 @@ namespace Consultoresvs3.Controllers
                 return RedirectToAction("Index");
             }
 
-            /////OJO
-            /// OJO PROBRAR IdProyecto (CREATE)
             ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
            // ViewBag.IdProyecto = new SelectList(db.Proyectos, "Id", "Nombre", reporteUsuario.IdProyecto);
             ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre", reporteUsuario.IdServicio);
