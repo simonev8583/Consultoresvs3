@@ -28,6 +28,11 @@ namespace Consultoresvs3.Controllers
             {
                 var rolAdmin = db.Roles.Where(r => r.Name.Equals("ADMIN"));
                 ViewBag.idEmpresa = new SelectList(db.Empresas, "Id", "NombreEmpresa");
+
+                // traer a todos los usuarios, menos al administrador
+
+                //var usuarios= 
+
                 ViewBag.UsuarioId = new SelectList(db.Users, "Id", "Nombre");
                 ViewBag.idProyecto = new SelectList(db.Proyectos, "Id", "Nombre");
                 var reporte_Empleados= db.ReporteUsuarios.Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
@@ -38,9 +43,7 @@ namespace Consultoresvs3.Controllers
                 // En este ViewBag van los proyectos en los que se encuentra el empleado logeado actualmente
                 if (db.ReporteUsuarios.Where(r=>r.IdUsuario.Equals(idusuario)).Count()<=0)
                 {
-                    var usuario = db.Users.Find(idusuario);
-                    ViewBag.Reporte = usuario.Nombre + " " + usuario.Apellido + " " + "Aun no tiene reportes";
-                    return PartialView("_Datosnulos");
+                    return RedirectToAction("Create");
                 }
                 else
                 {
@@ -178,45 +181,39 @@ namespace Consultoresvs3.Controllers
         public ActionResult FiltroProyectoEmp(int? idProyecto)
         {
             string idusuario = User.Identity.GetUserId();
-            //var Reporte = db.ReporteUsuarios.Where(r=> r.IdUsuario.Equals(idusuario) && r.IdProyecto.Equals(idProyecto)).Include(r=>r.Servicio);
             var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario) && r.IdProyecto == idProyecto).Include(r=>r.Servicio);
-            //ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
             ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
-            return PartialView("_FiltroProyectoemp", Reporte);
+            return PartialView("_FiltroProyectoemp", Reporte.ToList().OrderByDescending(r => r.FechaReporte));
         }
         public ActionResult FiltroProyectoAdm(int ? idProyecto)
         {
             var Reporte =db.ReporteUsuarios.Where(r=> r.IdProyecto == idProyecto).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
-            //var Reporte = db.ReporteUsuarios.Where(r => r.IdProyecto == idProyecto).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
-            //ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
             ViewBag.ProyectoId = db.Proyectos.Find(idProyecto);
-            return PartialView("_FiltroProyectoadm", Reporte);
+            return PartialView("_FiltroProyectoadm", Reporte.ToList().OrderByDescending(r => r.FechaReporte));
         }
         public ActionResult FiltroReporteUFechaEmp(int? mes,int? año)
         {
             string idusuario = User.Identity.GetUserId();
-            // var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month.Equals(mes) && r.FechaReporte.Year.Equals(año) && r.IdUsuario.Equals(idusuario));
             var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month == mes && r.FechaReporte.Year == año && r.IdUsuario.Equals(idusuario))
                 .Include(r => r.Proyecto).Include(r => r.Servicio);
-            return PartialView("_FiltroReporteUFechaemp", Reporte);
+            return PartialView("_FiltroReporteUFechaemp", Reporte.ToList().OrderByDescending(r => r.FechaReporte));
         }
         public ActionResult FiltroReporteUFechaAdm(int? mes, int? año)
         {
-            // var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month.Equals(mes) && r.FechaReporte.Year.Equals(año));
             var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month == mes && r.FechaReporte.Year == año).Include(r => r.Usuario)
                 .Include(r => r.Proyecto).Include(r => r.Servicio);
-            return PartialView("_FiltroReporteUFechaadm", Reporte);
+            return PartialView("_FiltroReporteUFechaadm", Reporte.ToList().OrderByDescending(r => r.FechaReporte));
         }     
         public ActionResult FiltroEmpresaAdm(int? idempresa)
         {            
             var Reporte = db.ReporteUsuarios.Where(r => r.Proyecto.IdEmpresa == idempresa).Include(r => r.Proyecto).Include(r => r.Usuario).Include(r => r.Proyecto.Empresa).Include(r => r.Servicio);
-            return PartialView("_FiltroEmpresaadm", Reporte);
+            return PartialView("_FiltroEmpresaadm", Reporte.ToList().OrderByDescending(r => r.FechaReporte));
         }
         public ActionResult FiltroEmpleadoAdm(string idusuario)
         {
             ViewBag.UsuarioId = db.Users.Find(idusuario);
             var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.Proyecto.Empresa);
-            return PartialView("_FiltroReporteEmpleadoeadm", Reporte);
+            return PartialView("_FiltroReporteEmpleadoeadm", Reporte.ToList().OrderByDescending(r => r.FechaReporte));
         }
         protected override void Dispose(bool disposing)
         {
