@@ -208,7 +208,7 @@ namespace Consultoresvs3.Controllers
         }
         public ActionResult FiltroEmpleadoAdm(string UsuarioId)
         {
-            ViewBag.UsuarioId = db.Users.Find(UsuarioId);
+            ViewBag.UsuarioId =db.Users.Find(UsuarioId);
             var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(UsuarioId)).Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.Proyecto.Empresa);
             return PartialView("_FiltroReporteEmpleadoeadm", Reporte.ToList().OrderByDescending(r => r.FechaReporte));
         }

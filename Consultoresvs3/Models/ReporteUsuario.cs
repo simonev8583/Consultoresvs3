@@ -22,7 +22,7 @@ namespace Consultoresvs3.Models
         public int IdServicio { get; set; }
 
         [ForeignKey("IdServicio")]
-        public Servicio Servicio { get; set; }
+        public virtual Servicio Servicio { get; set; }
         [Display(Name = "Proyecto")]
         public int IdProyecto { get; set; }
 
