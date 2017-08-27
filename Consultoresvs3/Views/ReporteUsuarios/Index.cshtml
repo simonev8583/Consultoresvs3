@@ -4,18 +4,26 @@
     ViewBag.Title = "Reporte Usuarios";
 }
 
-<h2>Reporte Usuarios</h2>
+<h2 style="color:#231bef;font-weight:bold;">Reporte Usuarios</h2>
 
-<p>
+@if (User.IsInRole("ADMIN"))
+{
+}
+else
+{<p>
     @Html.ActionLink("Agregar Reporte", "Create")
-</p>
+</p> }
 
 
-<br /><br /><br />
+
+<br />
 <form id="f">
-    <div class="form-group">
+    <div class="row">
+
+        <!--Filtro Proyecto--> 
+
         <label class="control-label col-md-2" for="ProyectosUsuario">Proyectos</label>
-        <div class="col-md-10">
+        <div class="col-md-2">
             @Html.DropDownList("idProyecto", null, htmlAttributes: new { @class = "form-control" })
         </div>
     </div>   
@@ -52,41 +60,65 @@
     }
 </form>
 
-<!--filtro para la fecha-->
+    <div class="row">
+        <!--filtro para la fecha-->
+        <label class="control-label col-md-2">Fecha</label>
+        <form id="date">
+            <div class="col-md-4">
+                <select id="mes" name="Mes">
+                    <option value="0">-</option>
+                    <option value="1">01-ENERO</option>
+                    <option value="2">02-FEBRERO</option>
+                    <option value="3">03-MARZO</option>
+                    <option value="4">04-ABRIL</option>
+                    <option value="5">05-MAYO</option>
+                    <option value="6">06-JUNIO</option>
+                    <option value="7">07-JULIO</option>
+                    <option value="8">08-AGOSTO</option>
+                    <option value="9">09-SEPTIEMBRE</option>
+                    <option value="10">10-OCTUBRE</option>
+                    <option value="11">11-NOVIEMBRE</option>
+                    <option value="12">12-DICIEMBRE</option>
+                </select>
+                <!-- <input type="text" id="mes"/>-->
+                <input type="text" id="año" />
+            </div>
+            @if (User.IsInRole("ADMIN"))
+            {
+                <div class="col-md-2">
+                    <a class="btn btn-primary fecha" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaAdm/")">Buscar</a>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-2">
+                    <a class="btn btn-primary fecha" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaEmp/")">Buscar</a>
+                </div>
+            }
+        </form>
+       
+    </div> 
 
-<form id="date">
-    <div class="form-group">
-        <select id="mes" name="Mes">
-            <option value="0">-</option>
-            <option value="1">01-ENERO</option>
-            <option value="2">02-FEBRERO</option>
-            <option value="3">03-MARZO</option>
-            <option value="4">04-ABRIL</option>
-            <option value="5">05-MAYO</option>
-            <option value="6">06-JUNIO</option>
-            <option value="7">07-JULIO</option>
-            <option value="8">08-AGOSTO</option>
-            <option value="9">09-SEPTIEMBRE</option>
-            <option value="10">10-OCTUBRE</option>
-            <option value="11">11-NOVIEMBRE</option>
-            <option value="12">12-DICIEMBRE</option>
-        </select>
-        <!-- <input type="text" id="mes"/>--> 
-        <input type="text" id="año" />
-    </div>
+    <br />
+    
+    <!--Filtro Empleado--> 
     @if (User.IsInRole("ADMIN"))
     {
-        <div class="form-group">
-            <a class="btn btn-primary fecha" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaAdm/")">Consultar Reporte U Fecha Admin</a>
-        </div>
-    }
-    else
-    {
-        <div class="form-group">
-            <a class="btn btn-primary fecha" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaEmp/")">Consultar Reporte U Fecha Empleado</a>
+        <div class="row">
+            <label class="control-label col-md-2" for="ProyectosUsuario">Empleados</label>
+            <div class="col-md-2">
+                @Html.DropDownList("UsuarioId", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-2">
+                <a class="btn btn-primary proyect" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoAdm/")">Buscar</a>
+            </div>
         </div>
     }
 </form>
+
+<br /><br />
+
 <table class="table" id="filtro">
     <tr>
         <th>
@@ -131,8 +163,6 @@
             @Html.DisplayFor(modelItem => item.HTrabajadas)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
             @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
         </td>
     </tr>

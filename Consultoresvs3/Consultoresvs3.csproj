@@ -229,6 +229,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagenes\banner.png" />
+    <Content Include="Imagenes\Img4.png" />
+    <Content Include="Imagenes\Img1.png" />
+    <Content Include="Imagenes\Img3.png" />
+    <Content Include="Imagenes\Img2.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -406,6 +411,7 @@
     <Content Include="Views\ReporteUsuarios\_FiltroReporteUFechaemp.cshtml" />
     <Content Include="Views\ReporteUsuarios\_FiltroReporteUFechaadm.cshtml" />
     <Content Include="Views\ReporteUsuarios\_FiltroReporteEmpleadoeadm.cshtml" />
+    <Content Include="Views\Home\ActualizarUsuario.cshtml" />
     <Content Include="Views\ReporteUsuarios\_Datosnulos.cshtml" />
     <Content Include="Views\ReporteUsuarios\_FiltroEmpresaadm.cshtml" />
   </ItemGroup>

@@ -118,6 +118,8 @@ namespace Consultoresvs3.Controllers
             return View(proyecto);
         }
 
+
+
         // POST: Proyectos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -136,6 +138,34 @@ namespace Consultoresvs3.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [HttpGet]
+        public ActionResult EditarEstado(int id)
+        {
+            var estado = db.EstadoProyectos.Where(t => t.Nombre == "Finalizado").First();
+            db.Proyectos.Find(id).Estado = estado;
+            db.Proyectos.Find(id).IdEstado = estado.Id;
+            db.SaveChanges();
+            CrearReporte(id);
+            return RedirectToAction("Index");
+        }
+        public ActionResult CrearReporte(int id)
+        {
+            var reporte = db.ReporteUsuarios.Where(t => t.Proyecto.Id == id).ToList();
+            int horastrabajadas = 0;
+            for (int i = 0; i < reporte.Count; i++)
+            {
+                horastrabajadas += reporte[i].HTrabajadas;
+            }
+            ReporteProyecto nuevoreporte = new ReporteProyecto();
+            nuevoreporte.HorasInvertidas = horastrabajadas;
+            Proyecto proyecto = db.Proyectos.Find(id);
+            nuevoreporte.IdProyecto = proyecto.Id;
+            nuevoreporte.Proyecto = proyecto;
+            nuevoreporte.Utilidad = (proyecto.TiempoEstipulado - horastrabajadas);
+            db.ReporteProyectos.Add(nuevoreporte);
+            db.SaveChanges();
+            return RedirectToAction("~/ReporteProyectoes/Index");
         }
     }
 }

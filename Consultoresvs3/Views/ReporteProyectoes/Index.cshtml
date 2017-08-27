@@ -4,11 +4,8 @@
     ViewBag.Title = "Reporte Proyectos";
 }
 
-<h2>Reporte Proyectos</h2>
+<h2 style="color:#231bef;font-weight:bold;">Reporte Proyectos</h2>
 
-<p>
-    @Html.ActionLink("Agregar Reporte", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -35,8 +32,6 @@
             @Html.DisplayFor(modelItem => item.Utilidad)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
             @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
         </td>
     </tr>

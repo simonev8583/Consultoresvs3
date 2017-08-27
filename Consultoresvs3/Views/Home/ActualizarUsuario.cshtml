@@ -1,0 +1,36 @@
+﻿<input type="text" id="identidad" placeholder="Identidad"/>
+<input type="text" id="salario"  placeholder="salario"/>
+<input type="text" id="valorhorasp"  placeholder="Valor horas prestacionales"/>
+<input type="text" id="valorhorasnp"  placeholder="Identidad"/>
+
+<div class="form-group">
+    <a class="btn btn-primary updateU" data-url="@Url.Content("/Home/ActualizarUsuario/")">Actualizar</a>
+</div>
+
+<div id="ans" style="color:blue">
+
+</div>
+
+@section scripts {
+    <script>
+          $(document).ready(function () {
+
+                     $('.updateU').click(function () {
+                         var identidad = $('#identidad').val();
+                         var salario = $('#salario').val();
+                         var valorhorasp = $('#valorhorasp').val();
+                         var valorhorasnp = $('#valorhorasp').val();
+                        $.ajax({
+                            method: 'POST',
+                            url: $(this).data('url'),
+                            data: { identidad: identidad, salario: salario, valorhorasp: valorhorasp, valorhorasnp: valorhorasnp}
+                        })
+                            .done(function (data) {
+                                $("#ans").html("<div class='alert alert- info' role='alert'>La información se actualizo correctamente</div >");
+                            }).fail(function () {
+                                alert("error");
+                            });
+                    });
+            });
+   </script>
+}
