@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Consultoresvs3.Models;
+using System.IO;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Consultoresvs3.Controllers
 {
@@ -132,6 +135,28 @@ namespace Consultoresvs3.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public void ExportExcel()
+        {
+            var grid = new GridView();
+            var reporte = db.ReporteProyectos.ToList();
+            grid.DataSource = from data in reporte
+                              select new
+                              {
+                                  Id = data.Id,
+                                  Proyecto = data.Proyecto.Nombre,
+                                  HorasInvertidas = data.HorasInvertidas,
+                                  Utilidad = data.Utilidad
+                              };
+            grid.DataBind();
+            Response.ClearContent();
+            Response.ContentType = "application/vnd.ms-excel";
+            Response.AddHeader("Content-Disposition", "attachment; filename=excelTest.xls");
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htmlwriter = new HtmlTextWriter(sw);
+            grid.RenderControl(htmlwriter);
+            Response.Write(sw.ToString());
+            Response.End();
         }
     }
 }
