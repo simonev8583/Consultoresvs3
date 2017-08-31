@@ -17,7 +17,7 @@ else
 
 
 <br />
-<form id="f">
+<form id="f" style='display:none'>
     <div class="row">
         <!--Filtro Proyecto--> 
         <label class="control-label col-md-2" for="ProyectosUsuario">Proyectos</label>
@@ -41,7 +41,7 @@ else
 </form>
 @if (User.IsInRole("ADMIN"))
 {
-    <form id="emp">
+    <form id="emp" style='display:none'>
         <div class="form-group">
             <label class="control-label col-md-2" for="ProyectosUsuario">Empresas</label>
             <div class="col-md-10">
@@ -52,13 +52,12 @@ else
     </form>
 }
 
-    <div class="row">
+    <div class="row" id="date" style='display:none'>
         <!--filtro para la fecha-->
         <label class="control-label col-md-2">Fecha</label>
         <form id="date">
             <div class="col-md-4">
                 <select id="mes" name="Mes">
-                    <option value="0">-</option>
                     <option value="1">01-ENERO</option>
                     <option value="2">02-FEBRERO</option>
                     <option value="3">03-MARZO</option>
@@ -73,11 +72,12 @@ else
                     <option value="12">12-DICIEMBRE</option>
                 </select>
                 <!-- <input type="text" id="mes"/>-->
-                <input type="text" id="año" />
+                <!--<input type="text" id="año" />-->
+                <select id="año" ></select><br /> 
             </div>
             @if (User.IsInRole("ADMIN"))
             {
-                <div class="col-md-2">
+                <div class="col-md-2" id="fechaAdm">
                     <a class="btn btn-primary fecha" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaAdm/")">Buscar</a>
                 </div>
             }
@@ -96,7 +96,7 @@ else
     <!--Filtro Empleado--> 
     @if (User.IsInRole("ADMIN"))
     {
-        <form id="form-employes">
+        <form id="form-employes" style='display:none'>
             <div class="row">
                 <label class="control-label col-md-2" for="ProyectosUsuario">Empleados</label>
                 <div class="col-md-2">
@@ -111,7 +111,38 @@ else
     }
 
 <br /><br />
+<!--menu filtros de busqueda-->
+@if (User.IsInRole("ADMIN"))
+{
+<div>
+    <h3>Filtrar por</h3>
+    <select id="filtrosAdm">
+        <option value="1">Empleado</option>
+        <option value="2">Empresa</option>
+        <option value="3">Fecha</option>
+        <option value="4">Proyecto</option>
+    </select><br /> 
+    <div class="col-md-2">
+        <a class="btn btn-primary"onclick="FiltrosAdmin()" >Buscar</a>
+    </div>
+</div>
+}
+else
+{
+    <div>
+        <h3>Filtrar por</h3>
+        <select id="filtrosEmp">
+            <option value="1">Fecha</option>
+            <option value="2">Proyecto</option>
+        </select><br />
+        <div class="col-md-2">
+            <a class="btn btn-primary" onclick="FiltrosEmp()">Buscar</a>
+        </div>
+    </div>
+}
 
+
+<!--TABLA DONDE SE GENERAN LOS REPORTES-->
 <table class="table" id="filtro">
     <tr>
         <th>
@@ -232,5 +263,76 @@ else
                     });
             });
     </script>
+
+    <script>
+        function listyears() {
+            var anios = document.getElementById("año");
+            var fecha = new Date();
+            year = fecha.getFullYear();
+            var listyear = [];
+            for (var i = 2000; i <= year; ++i) {
+                listyear.unshift(i);
+            }
+            for (var j = 0; j < listyear.length; ++j) {
+                anios.options[j] = new Option(listyear[j], listyear[j]);
+            }
+        }
+    </script>
+
+    <script>
+        function FiltrosAdmin() {
+            var indice = document.getElementById("filtrosAdm").value;
+            var empleado = document.getElementById("form-employes");
+            var empresa = document.getElementById("emp");
+            var fecha = document.getElementById("date");
+            var proyecto = document.getElementById("f");
+            if (indice == 1) {
+                empleado.style.display = 'block';
+                empresa.style.display = 'none';
+                fecha.style.display = 'none';
+                proyecto.style.display = 'none';
+            }
+            if (indice == 2) {
+                empresa.style.display = 'block';
+                empleado.style.display = 'none';
+                fecha.style.display = 'none';
+                proyecto.style.display = 'none';
+            }
+            if (indice == 3) {
+                listyears();
+                fecha.style.display = 'block';
+                empleado.style.display = 'none';
+                empresa.style.display = 'none';
+                proyecto.style.display = 'none';
+            }
+            if (indice == 4) {
+                proyecto.style.display = 'block';
+                empleado.style.display = 'none';
+                empresa.style.display = 'none';
+                fecha.style.display = 'none';
+            }
+        }
+        </script>
+
+    <script>
+        function FiltrosEmp() {
+            var indice = document.getElementById("filtrosEmp").value;
+            var fecha = document.getElementById("date");
+            var proyecto = document.getElementById("f");
+            if (indice == 1) {
+                listyears();
+                fecha.style.display = 'block';
+                proyecto.style.display = 'none';
+            }
+            if (indice == 2) {
+                proyecto.style.display = 'block';
+                fecha.style.display = 'none';
+            }
+        }
+    </script>
+            
+
+
+
 
 }

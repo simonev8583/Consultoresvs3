@@ -412,7 +412,6 @@
     <Content Include="Views\ReporteUsuarios\_FiltroReporteUFechaadm.cshtml" />
     <Content Include="Views\ReporteUsuarios\_FiltroReporteEmpleadoeadm.cshtml" />
     <Content Include="Views\Home\ActualizarUsuario.cshtml" />
-    <Content Include="Views\ReporteUsuarios\_Datosnulos.cshtml" />
     <Content Include="Views\ReporteUsuarios\_FiltroEmpresaadm.cshtml" />
   </ItemGroup>
   <ItemGroup>
