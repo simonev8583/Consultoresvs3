@@ -9,11 +9,14 @@
                 <h7>Fecha</h7>
             </th>
             <th>
-                <h7>Empleado</h7>
+                <h7>Empresa</h7>
             </th>
             <th>
                 <h7>Proyecto</h7>
             </th>
+            <th>
+                <h7>Empleado</h7>
+            </th>          
             <th>
                 <h7>Servicio</h7>
             </th>
@@ -30,11 +33,14 @@
                     @Html.DisplayFor(modelItem => item.FechaReporte)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                    @Html.DisplayFor(modelItem => item.Proyecto.Empresa.NombreEmpresa)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                </td>         
                 <td>
                     @Html.DisplayFor(modelItem => item.Servicio.Nombre)
                 </td>

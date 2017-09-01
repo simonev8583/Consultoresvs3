@@ -14,7 +14,43 @@ else
     @Html.ActionLink("Agregar Reporte", "Create")
 </p> }
 
-
+<!--menu filtros de busqueda-->
+@if (User.IsInRole("ADMIN"))
+{
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Filtrar por</h3>
+        </div>
+        <div class="col-md-3">
+            <select id="filtrosAdm">
+                <option value="1">Empleado</option>
+                <option value="2">Empresa</option>
+                <option value="3">Fecha</option>
+                <option value="4">Proyecto</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-primary" onclick="FiltrosAdmin()">Buscar</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Filtrar por</h3>
+        </div>
+        <div class="col-md-3">
+            <select id="filtrosEmp">
+                <option value="1">Fecha</option>
+                <option value="2">Proyecto</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-primary" onclick="FiltrosEmp()">Buscar</a>
+        </div>
+    </div>
+}
 
 <br />
 <form id="f" style='display:none'>
@@ -111,35 +147,7 @@ else
     }
 
 <br /><br />
-<!--menu filtros de busqueda-->
-@if (User.IsInRole("ADMIN"))
-{
-<div>
-    <h3>Filtrar por</h3>
-    <select id="filtrosAdm">
-        <option value="1">Empleado</option>
-        <option value="2">Empresa</option>
-        <option value="3">Fecha</option>
-        <option value="4">Proyecto</option>
-    </select><br /> 
-    <div class="col-md-2">
-        <a class="btn btn-primary"onclick="FiltrosAdmin()" >Buscar</a>
-    </div>
-</div>
-}
-else
-{
-    <div>
-        <h3>Filtrar por</h3>
-        <select id="filtrosEmp">
-            <option value="1">Fecha</option>
-            <option value="2">Proyecto</option>
-        </select><br />
-        <div class="col-md-2">
-            <a class="btn btn-primary" onclick="FiltrosEmp()">Buscar</a>
-        </div>
-    </div>
-}
+
 
 
 <!--TABLA DONDE SE GENERAN LOS REPORTES-->

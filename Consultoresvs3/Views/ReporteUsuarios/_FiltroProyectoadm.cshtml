@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<Consultoresvs3.Models.ReporteUsuario>
 
-<div id="NombreProyecto">
-    <h4 style="color:#231bef;font-weight:bold;">Proyecto</h4>
-    <h5>@ViewBag.ProyectoId.Nombre</h5>
-    <h4 style="color:#231bef;font-weight:bold;">Empresa</h4>
-    <h5>@ViewBag.ProyectoId.Empresa.NombreEmpresa</h5>
 
-</div>
 <div class="table-responsive">
     <table class="table table-striped">
         <tr>
 
             <th>
                 <h7>Fecha</h7>
+            </th>
+            <th>
+                <h7>Proyecto</h7>
+            </th>
+            <th>
+                <h7>Empresa</h7>
             </th>
             <th>
                 <h7>Empleado</h7>
@@ -31,6 +31,12 @@
 
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaReporte)
+                </td>
+                <td>
+                    @ViewBag.ProyectoId.Nombre
+                </td>
+                <td>
+                    @ViewBag.ProyectoId.Empresa.NombreEmpresa
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Usuario.Nombre)

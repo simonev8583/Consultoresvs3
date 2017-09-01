@@ -3,16 +3,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Proyecto.Nombre)
+            <h7>Fecha</h7>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Servicio.Nombre)
+            <h7>Proyecto</h7>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaReporte)
+            <h7>Empresa</h7>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HTrabajadas)
+            <h7>Empleado</h7>
+        </th>
+        <th>
+            <h7>Servicio</h7>
+        </th>
+        <th>
+            <h7>Horas Trabajadas</h7>
         </th>
         <th></th>
     </tr>
@@ -20,13 +26,19 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.FechaReporte)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Servicio.Nombre)
+                @Html.DisplayFor(modelItem => item.Proyecto.Empresa.NombreEmpresa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FechaReporte)
+                @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Servicio.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HTrabajadas)
