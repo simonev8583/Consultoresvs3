@@ -16,7 +16,7 @@ namespace Consultoresvs3.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString ="{0:yyyy/MM/dd}",ApplyFormatInEditMode =true)]
         public DateTime FechaReporte { get; set; }
-
+        [Range(1, 10, ErrorMessage = "{0} las horas deben estar entre {1} y {2} .")]
         [Display(Name = "Horas Trabajadas")]
         public int HTrabajadas { get; set; }
         public int IdServicio { get; set; }
