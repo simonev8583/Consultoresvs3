@@ -32,11 +32,13 @@ namespace Consultoresvs3.Controllers
             return View();
         }
         [HttpGet]
+        [Authorize]
         public ActionResult ActualizarUsuario()
         {
             return View();
         }
         [HttpPost]
+        [Authorize]
         public ActionResult ActualizarUsuario(int? identidad,double salario,double valorhorasp,double valorhorasnp)
         {
             if (identidad == null)

@@ -109,7 +109,7 @@ namespace Consultoresvs3.Migrations
             var user1 = new ApplicationUser
             {
                 UserName = "daniel@consultores.com",
-                Nombre = "Cristian",
+                Nombre = "Daniel",
                 Apellido = "Castañeda",
                 Identificacion = 0021223344,
                 FechaIngresoEmpresa = "12/12/2013",
@@ -134,12 +134,6 @@ namespace Consultoresvs3.Migrations
                     roleName
                 );
             }
-            context.ReporteUsuarios.AddOrUpdate(
-                a => a.Id,
-                new ReporteUsuario { Id = 1, FechaReporte = new DateTime(1996, 05, 22, 12, 00, 00),HTrabajadas=50,IdServicio= 1, IdProyecto = 1, IdUsuario = "c566ab0a-8f56-43cb-9341-25d0979da63c" },
-                new ReporteUsuario { Id = 2, FechaReporte = new DateTime(1996, 05, 22, 12, 00, 00), HTrabajadas =  100, IdServicio = 1, IdProyecto = 2, IdUsuario = "c566ab0a-8f56-43cb-9341-25d0979da63c" },
-                new ReporteUsuario { Id = 2, FechaReporte = new DateTime(1996, 05, 22, 12, 00, 00), HTrabajadas = 32, IdServicio = 1, IdProyecto = 2, IdUsuario = "c566ab0a-8f56-43cb-9341-25d0979da63c" }
-            );
         }
     }
 }

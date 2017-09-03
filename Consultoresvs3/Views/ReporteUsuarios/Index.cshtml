@@ -18,10 +18,10 @@ else
 @if (User.IsInRole("ADMIN"))
 {
     <div class="row">
-        <div class="col-md-3">
-            <h3>Filtrar por</h3>
+        <div class="col-md-2">
+            <label style="font-size:25px;margin-top:8%" class="control-label">Filtrar por</label>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2" style="margin-top:2%;">
             <select id="filtrosAdm">
                 <option value="1">Empleado</option>
                 <option value="2">Empresa</option>
@@ -29,25 +29,25 @@ else
                 <option value="4">Proyecto</option>
             </select>
         </div>
-        <div class="col-md-2">
-            <a class="btn btn-primary" onclick="FiltrosAdmin()">Buscar</a>
+        <div class="col-md-2" style="margin-top:1%;">
+            <a class="btn btn-primary" onclick="FiltrosAdmin()">Filtrar</a>
         </div>
     </div>
 }
 else
 {
     <div class="row">
-        <div class="col-md-3">
-            <h3>Filtrar por</h3>
+        <div class="col-md-2">
+            <label style="font-size:25px;margin-top:8%" class="control-label">Filtrar por</label>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2" style="margin-top:2%;">
             <select id="filtrosEmp">
                 <option value="1">Fecha</option>
                 <option value="2">Proyecto</option>
             </select>
         </div>
-        <div class="col-md-2">
-            <a class="btn btn-primary" onclick="FiltrosEmp()">Buscar</a>
+        <div class="col-md-2" style="margin-top:1%;">
+            <a class="btn btn-primary" style="margin-top:1%;" onclick="FiltrosEmp()">Filtrar</a>
         </div>
     </div>
 }
@@ -56,43 +56,54 @@ else
 <form id="f" style='display:none'>
     <div class="row">
         <!--Filtro Proyecto--> 
-        <label class="control-label col-md-2" for="ProyectosUsuario">Proyectos</label>
-        <div class="col-md-2">
+
+        <label style="font-size:25px" class="control-label col-lg-2" for="ProyectosUsuario">Proyectos</label>
+        <div class="col-lg-2">
             @Html.DropDownList("idProyecto", null, htmlAttributes: new { @class = "form-control" })
         </div>
+        @if (User.IsInRole("ADMIN"))
+        {
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <a class="btn btn-primary proyect" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoAdm/")">Buscar</a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <a class="btn btn-primary proyect" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoEmp/")">Buscar</a>
+                </div>
+            </div>
+        }
     </div>   
-    @if (User.IsInRole("ADMIN"))
-    {
-        <div class="form-group">
-            <a class="btn btn-primary proyect" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoAdm/")">Consultar Proyecto Admin</a>
-        </div>
-
-    }
-    else
-    {
-        <div class="form-group">
-            <a class="btn btn-primary proyect" data-url="@Url.Content("/ReporteUsuarios/FiltroProyectoEmp/")">Consultar Proyecto Empleado</a>
-        </div>
-    }
 </form>
+
+
 @if (User.IsInRole("ADMIN"))
 {
     <form id="emp" style='display:none'>
-        <div class="form-group">
-            <label class="control-label col-md-2" for="ProyectosUsuario">Empresas</label>
-            <div class="col-md-10">
+        <div class="row">
+            <label style="font-size:25px" class="control-label col-lg-2" for="ProyectosUsuario">Empresas</label>       
+            <div class="col-lg-2">
                 @Html.DropDownList("idEmpresa", null, htmlAttributes: new { @class = "form-control" })
             </div>
-            <a class="btn btn-primary empB" data-url="@Url.Content("/ReporteUsuarios/FiltroEmpresaAdm/")">Consultar Empresa Admin</a>
+            <div class="col-lg-2">
+                <a class="btn btn-primary empB" data-url="@Url.Content("/ReporteUsuarios/FiltroEmpresaAdm/")">Buscar</a>
+            </div>         
         </div>
     </form>
+    <br />
 }
 
     <div class="row" id="date" style='display:none'>
         <!--filtro para la fecha-->
-        <label class="control-label col-md-2">Fecha</label>
-        <form id="date">
-            <div class="col-md-4">
+        <div class="col-lg-2">
+            <label style="font-size:25px;margin-top:-5%" class="control-label">Fecha</label>
+        </div>
+        <div class="col-lg-2">
+            <form id="date">
                 <select id="mes" name="Mes">
                     <option value="1">01-ENERO</option>
                     <option value="2">02-FEBRERO</option>
@@ -109,22 +120,21 @@ else
                 </select>
                 <!-- <input type="text" id="mes"/>-->
                 <!--<input type="text" id="año" />-->
-                <select id="año" ></select><br /> 
-            </div>
-            @if (User.IsInRole("ADMIN"))
+                <select id="año"></select><br />
+            </form>
+        </div>   
+       @if (User.IsInRole("ADMIN"))
             {
-                <div class="col-md-2" id="fechaAdm">
-                    <a class="btn btn-primary fecha" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaAdm/")">Buscar</a>
-                </div>
-            }
-            else
-            {
-                <div class="col-md-2">
-                    <a class="btn btn-primary fecha" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaEmp/")">Buscar</a>
-                </div>
-            }
-        </form>
-       
+        <div class="col-lg-2" id="fechaAdm">
+            <a class="btn btn-primary fecha" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaAdm/")">Buscar</a>
+        </div>
+       }
+       else
+       {
+        <div class="col-lg-2">
+            <a class="btn btn-primary fecha" data-url="@Url.Content("/ReporteUsuarios/FiltroReporteUFechaEmp/")">Buscar</a>
+        </div>
+       }
     </div> 
 
     <br />
@@ -132,21 +142,21 @@ else
     <!--Filtro Empleado--> 
     @if (User.IsInRole("ADMIN"))
     {
-        <form id="form-employes" style='display:none'>
+        <form id="form-employes" style='display:none;margin-top:-3%'>
             <div class="row">
-                <label class="control-label col-md-2" for="ProyectosUsuario">Empleados</label>
-                <div class="col-md-2">
+                <label style="font-size:25px" class="control-label col-lg-2" for="ProyectosUsuario">Empleados</label>
+                <div class="col-lg-2">
                     @Html.DropDownList("UsuarioId", null, htmlAttributes: new { @class = "form-control" })
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-lg-2">
                     <a class="btn btn-primary Bemployes" data-url="@Url.Content("/ReporteUsuarios/FiltroEmpleadoAdm/")">Buscar</a>
                 </div>
             </div>
         </form>
+        <br />
     }
 
-<br /><br />
 
 
 
@@ -159,7 +169,7 @@ else
         @if (User.IsInRole("ADMIN"))
         {
             <th>
-                Usuario
+                Empleado
             </th>
         }
         <th>

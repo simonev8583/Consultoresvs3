@@ -38,7 +38,7 @@ textarea {
 }
 
 .efect-shadow:hover {
-    transition: all ease 0.2s;
+    transition: all ease 0.1s;
     box-shadow: 8px 8px 10px grey;
 }
 
