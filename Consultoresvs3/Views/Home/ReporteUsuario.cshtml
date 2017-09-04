@@ -1,0 +1,24 @@
+﻿
+
+@if (User.IsInRole("ADMIN"))
+{
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <center><h1 style="font-weight:bold">USUARIO A EXPORTAR</h1></center>
+        </div>
+    </div>
+    <br />
+    using (Html.BeginForm("ReporteExcel", "Home", FormMethod.Post))
+    {
+    <div class="row">
+        <div class="col-lg-3">
+            <input type="text" id="identidad" name="identidad" style="width:100%" placeholder="Identidad" />
+        </div>
+    </div>
+    <div class="text-center">
+        <button style="background-color:#ff6a00;color:white;border-color:#ff6a00" type="submit" class="btn btn-primary">Exportar</button>
+    </div>
+    }
+    <a class="btn btn-danger" href="javascript:history.back()"> Volver Atrás</a>
+}

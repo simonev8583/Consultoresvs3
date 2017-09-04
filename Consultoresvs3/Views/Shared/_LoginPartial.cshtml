@@ -10,7 +10,7 @@
         @if (User.IsInRole("ADMIN"))
         {
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Administrar <span class="caret"></span></a>
+            <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Administrar <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
                 <li><a href="~/Empresas">Empresas</a></li>
                 <li><a href="~/Proyectos">Proyectos</a></li>
@@ -18,6 +18,15 @@
                 <li><a href="~/ReporteUsuarios">Reporte usuarios</a></li>
                 <li><a href="~/Servicios">Servicios</a></li>
                 <li><a href="~/Home/ActualizarUsuario">Actualizar empleado</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Excel <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="~/Proyectos/ExportExcelProyectos">Exportar Proyectos</a></li>
+                <li><a href="~/ReporteProyectoes/ExportExcel">Exportar Reporte proyectos</a></li>
+                <li><a href="~/ReporteUsuarios/ExportExcel">Exportar Reporte empleado</a></li>
+                <li><a href="~/Home/ReporteUsuario">Exportar reporte por empleado</a></li>
             </ul>
         </li>
         }

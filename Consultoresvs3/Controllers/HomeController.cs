@@ -1,10 +1,13 @@
 ﻿using Consultoresvs3.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Consultoresvs3.Controllers
 {
@@ -39,7 +42,7 @@ namespace Consultoresvs3.Controllers
         }
         [HttpPost]
         [Authorize]
-        public ActionResult ActualizarUsuario(int? identidad,double salario,double valorhorasp,double valorhorasnp)
+        public ActionResult ActualizarUsuario(int? identidad, double salario, double valorhorasp, double valorhorasnp)
         {
             if (identidad == null)
             {
@@ -70,6 +73,42 @@ namespace Consultoresvs3.Controllers
                 return PartialView("_UsuarioActualizado");
             }
         }
+        [HttpGet]
+        [Authorize]
+        public ActionResult ReporteUsuario()
+        {
+            return View();
+        }
 
+        public List<ReporteUsuario> reportesusuario(int identidad)
+        {
+            return db.ReporteUsuarios.Where(t => t.Usuario.Identificacion == identidad).ToList();
+        }
+
+        [HttpPost]
+        public ActionResult ReporteExcel(int identidad)
+        {
+            var grid = new GridView();
+            var reporte = reportesusuario(identidad);
+            grid.DataSource = from data in reporte
+                              select new
+                              {
+                                  Id = data.Id,
+                                  Usuario = data.Usuario.Nombre,
+                                  Identidad = data.Usuario.Identificacion,
+                                  Proyecto = data.Proyecto.Nombre,
+                                  HorasTrabajdas = data.HTrabajadas
+                              };
+            grid.DataBind();
+            Response.ClearContent();
+            Response.ContentType = "application/vnd.ms-excel";
+            Response.AddHeader("Content-Disposition", "attachment; filename=excelTest.xls");
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htmlwriter = new HtmlTextWriter(sw);
+            grid.RenderControl(htmlwriter);
+            Response.Write(sw.ToString());
+            Response.End();
+            return PartialView("_Exportado");
+        }
     }
 }
