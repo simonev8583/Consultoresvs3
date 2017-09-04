@@ -45,21 +45,30 @@ namespace Consultoresvs3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var user=db.Users.Where(t => t.Identificacion == identidad).First();
-            if (user == null)
+
+            var users = db.Users.Where(t => t.Identificacion == identidad).ToList();
+            if (users.Count() == 0)
             {
-                return HttpNotFound();
+                return PartialView("_UsuarioNoActualizado");
             }
-            db.Users.Where(t => t.Identificacion == identidad).First().Salario = salario;
+            else
+            {
+                var user = db.Users.Where(t => t.Identificacion == identidad).First();
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                db.Users.Where(t => t.Identificacion == identidad).First().Salario = salario;
 
-            db.Users.Where(t => t.Identificacion == identidad).First().ValorHoraPrestacionesSociales = valorhorasp;
+                db.Users.Where(t => t.Identificacion == identidad).First().ValorHoraPrestacionesSociales = valorhorasp;
 
-            db.Users.Where(t => t.Identificacion == identidad).First().ValorHoraNoPrestacionSociales = valorhorasnp;
+                db.Users.Where(t => t.Identificacion == identidad).First().ValorHoraNoPrestacionSociales = valorhorasnp;
 
-            db.SaveChanges();
+                db.SaveChanges();
 
 
-            return View();
+                return PartialView("_UsuarioActualizado");
+            }
         }
 
     }

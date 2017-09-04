@@ -17,10 +17,10 @@
             <input type="text" style="width:100%" id="salario" placeholder="Salario" />
         </div>
         <div class="col-lg-3">
-            <input type="text" style="width:100%" id="valorhorasp" placeholder="Valor horas con prestaciones" />
+            <input type="text" style="width:100%" id="valorhorasp" placeholder="Valor horas con prestaciones"  />
         </div>
         <div class="col-lg-3">
-            <input type="text" style="width:100%" id="valorhorasnp" placeholder="Valor horas sin prestaciones" />
+            <input type="text" style="width:100%" id="valorhorasnp" placeholder="Valor horas sin prestaciones"  />
         </div>
     </div>
 
@@ -50,7 +50,7 @@
                         data: { identidad: identidad, salario: salario, valorhorasp: valorhorasp, valorhorasnp: valorhorasnp }
                     })
                         .done(function (data) {
-                            $("#ans").html("<div class='alert alert- info' role='alert'>La información se actualizo correctamente</div >");
+                            $("#ans").html(data);
                         }).fail(function () {
                             alert("error");
                         });
