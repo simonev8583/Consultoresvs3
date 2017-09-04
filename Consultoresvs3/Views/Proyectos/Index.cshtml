@@ -33,7 +33,36 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    if (item.Estado.Nombre == "Finalizado")
+    {
+        <tr class="bg-primary">
+            <td>
+                @Html.DisplayFor(modelItem => item.Empresa.NombreEmpresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TiempoEstipulado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr>
+    
         <td>
             @Html.DisplayFor(modelItem => item.Empresa.NombreEmpresa)
         </td>
@@ -53,11 +82,13 @@
             @Html.DisplayFor(modelItem => item.Fecha)
         </td>
         <td>
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.Id }) |
-            @if(User.IsInRole("ADMIN")){
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
+            @if (User.IsInRole("ADMIN"))
+            {
                 @Html.ActionLink("Finalizar", "EditarEstado", new { id = item.Id })
             } 
         </td>
     </tr>
+    }
 }
 </table>
