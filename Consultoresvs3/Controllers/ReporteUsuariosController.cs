@@ -173,6 +173,9 @@ namespace Consultoresvs3.Controllers
         }
         // DESACOPLE FILTROS 
         //DF => Desacople Filtro ...
+
+        // Consulta en la base de datos los reportes generados por el empleado logeado
+        // actualmente y trae los reportes de un proyecto especifico
         public dynamic DFProyectoEmp(int? idProyecto)
         {
             string idusuario = User.Identity.GetUserId();
@@ -180,11 +183,15 @@ namespace Consultoresvs3.Controllers
                 .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.IdUsuario);
             return Reporte;
         }
+        // Consulta en la base de datos los reportes generados 
+        // trae  todos los reportes de un proyecto especifico
         public dynamic DFProyectoAdm(int? idProyecto) {
             var Reporte = db.ReporteUsuarios.Where(r => r.IdProyecto == idProyecto).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio)
                 .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.IdUsuario);
             return Reporte;
         }
+        // Consulta en la base de datos los reportes generados en un mes especifico
+        //  del empleado logeado actualmente
         public dynamic DFReporteUFechaEmp(int? mes, int?año)
         {
             string idusuario = User.Identity.GetUserId();
@@ -193,6 +200,7 @@ namespace Consultoresvs3.Controllers
                 .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id);
             return Reporte;
         }
+        // Consulta en la base de datos los reportes generados en un mes especifico
         public dynamic DFReporteUFechaAdm(int? mes, int? año)
         {
             var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month == mes && r.FechaReporte.Year == año).Include(r => r.Usuario)
@@ -200,12 +208,16 @@ namespace Consultoresvs3.Controllers
                 .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id);
             return Reporte;
         }
+        // Consulta en la base de datos los reportes de todos los proyectos que perteneces 
+        // a una empresa en especifico
         public dynamic DFiltroEmpresaAdm(int? idEmpresa)
         {
             var Reporte = db.ReporteUsuarios.Where(r => r.Proyecto.IdEmpresa == idEmpresa).Include(r => r.Proyecto).Include(r => r.Usuario).Include(r => r.Proyecto.Empresa).Include(r => r.Servicio)
                .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Id);
             return Reporte;
         }
+        // Consulta en la base de datos los reportes generados por 
+        // un empleado en especifico 
         public dynamic DFiltroEmpleadoAdm(string UsuarioId)
         {
             var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(UsuarioId)).Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.Proyecto.Empresa)
@@ -214,6 +226,8 @@ namespace Consultoresvs3.Controllers
         }
         // FILTROS DE BUSQUEDA 
         // Queremos mostrar la informacion que tiene cada empleado según un proyecto en especial.
+
+         // Retorna los resultados de cada consulta en la vista, y muestra los reportes 
         [HttpPost]
         public ActionResult FiltroProyectoEmp(int? idProyecto)
         {
