@@ -21,7 +21,7 @@
             Proyecto
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Precio)
+            @Html.DisplayNameFor(model => model.Precio)  (Pesos)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TiempoEstipulado)
@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Precio)
+                <span style="font-weight:bold">$</span>  @Html.DisplayFor(modelItem => item.Precio)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TiempoEstipulado)
@@ -73,7 +73,7 @@
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Precio)
+            <span style="font-weight:bold">$</span>   @Html.DisplayFor(modelItem => item.Precio)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TiempoEstipulado)
