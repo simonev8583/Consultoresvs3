@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Consultoresvs3.Models
 {
@@ -21,6 +17,6 @@ namespace Consultoresvs3.Models
         [Display(Name = "Horas Invertidas")]
         public int HorasInvertidas { get; set; }
         //utilidad
-        public int Utilidad { get; set; }
+        public double Utilidad { get; set; }
     }
 }

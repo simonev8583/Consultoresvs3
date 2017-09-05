@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -200,9 +201,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708192257337_firts.cs" />
-    <Compile Include="Migrations\201708192257337_firts.Designer.cs">
-      <DependentUpon>201708192257337_firts.cs</DependentUpon>
+    <Compile Include="Migrations\201709050400151_second.cs" />
+    <Compile Include="Migrations\201709050400151_second.Designer.cs">
+      <DependentUpon>201709050400151_second.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -428,8 +429,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708192257337_firts.resx">
-      <DependentUpon>201708192257337_firts.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709050400151_second.resx">
+      <DependentUpon>201709050400151_second.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -161,7 +161,7 @@ else
 
 
 <!--TABLA DONDE SE GENERAN LOS REPORTES-->
-<table class="table" id="filtro">
+<table class="table inicial" id="filtro">
     <tr>
         <th>
             Proyecto
@@ -211,6 +211,10 @@ else
 }
 </table>
 
+<div>
+    <center><a class="btn btn-danger" id="deshacer" style="display:none" href="~/ReporteUsuarios">Deshacer búsqueda</a></center>
+</div>
+
 @section scripts {
     <script>
            $(document).ready(function () {
@@ -224,6 +228,7 @@ else
                                 $('#filtro').hide();
                                 $('#filtro').html(data);
                                 $('#filtro').show('fast');
+                                $('#deshacer').show('fast');
                             }).fail(function () {
                                 alert("error");
                          });
@@ -241,6 +246,7 @@ else
                                 $('#filtro').hide();
                                 $('#filtro').html(data);
                                 $('#filtro').show('fast');
+                                $('#deshacer').show('fast');
                             }).fail(function () {
                                 alert("error");
                             });
@@ -257,6 +263,7 @@ else
                                 $('#filtro').hide();
                                 $('#filtro').html(data);
                                 $('#filtro').show('fast');
+                                $('#deshacer').show('fast');
                             }).fail(function () {
                                 alert("error");
                             });
@@ -274,6 +281,7 @@ else
                                 $('#filtro').hide();
                                 $('#filtro').html(data);
                                 $('#filtro').show('fast');
+                                $('#deshacer').show('fast');
                             }).fail(function () {
                                 alert("error");
                             });
@@ -347,9 +355,4 @@ else
             }
         }
     </script>
-            
-
-
-
-
 }

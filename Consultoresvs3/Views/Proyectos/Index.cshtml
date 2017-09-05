@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Empresa.NombreEmpresa)
+            Empresa
         </th>
         <th>
             Estado Proyecto
@@ -55,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.Fecha)
             </td>
             <td>
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
             </td>
         </tr>
     }

@@ -3,7 +3,7 @@ namespace Consultoresvs3.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class firts : DbMigration
+    public partial class second : DbMigration
     {
         public override void Up()
         {
@@ -79,7 +79,7 @@ namespace Consultoresvs3.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         IdProyecto = c.Int(nullable: false),
                         HorasInvertidas = c.Int(nullable: false),
-                        Utilidad = c.Int(nullable: false),
+                        Utilidad = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Proyectoes", t => t.IdProyecto, cascadeDelete: true)

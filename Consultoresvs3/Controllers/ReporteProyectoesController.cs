@@ -143,7 +143,6 @@ namespace Consultoresvs3.Controllers
             grid.DataSource = from data in reporte
                               select new
                               {
-                                  Id = data.Id,
                                   Proyecto = data.Proyecto.Nombre,
                                   HorasInvertidas = data.HorasInvertidas,
                                   Utilidad = data.Utilidad

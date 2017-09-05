@@ -278,17 +278,19 @@ namespace Consultoresvs3.Controllers
         public ActionResult CrearReporte(int id)
         {
             var reporte = db.ReporteUsuarios.Where(t => t.Proyecto.Id == id).ToList();
+            double utilidad = 0;
             int horastrabajadas = 0;
             for (int i = 0; i < reporte.Count; i++)
             {
-                horastrabajadas += reporte[i].HTrabajadas;
+                horastrabajadas += reporte[i].HTrabajadas; 
+                utilidad += (reporte[i].HTrabajadas * reporte[i].Usuario.ValorHoraPrestacionesSociales);
             }
             ReporteProyecto nuevoreporte = new ReporteProyecto();
             nuevoreporte.HorasInvertidas = horastrabajadas;
             Proyecto proyecto = db.Proyectos.Find(id);
             nuevoreporte.IdProyecto = proyecto.Id;
             nuevoreporte.Proyecto = proyecto;
-            nuevoreporte.Utilidad = (proyecto.TiempoEstipulado - horastrabajadas);
+            nuevoreporte.Utilidad = proyecto.Precio - utilidad;
             db.ReporteProyectos.Add(nuevoreporte);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -300,7 +302,6 @@ namespace Consultoresvs3.Controllers
             grid.DataSource = from data in reporte
                               select new
                               {
-                                  Id = data.Id,
                                   Usuario = data.Usuario.Nombre,
                                   Identidad = data.Usuario.Identificacion,
                                   Proyecto = data.Proyecto.Nombre,
