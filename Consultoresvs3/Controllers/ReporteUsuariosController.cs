@@ -82,9 +82,17 @@ namespace Consultoresvs3.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
+            int ejecucionproyectos = db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO").Count();
+            if (ejecucionproyectos > 0)
+            {
+                ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
             ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre");
             return View();
+            }
+            else
+            {
+                return PartialView("_sinproyectos");
+            }
         }
 
         // POST: ReporteUsuarios/Create
@@ -94,17 +102,21 @@ namespace Consultoresvs3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FechaReporte,HTrabajadas,IdServicio,IdProyecto,IdUsuario")] ReporteUsuario reporteUsuario)
         {
-            if (ModelState.IsValid)
-            {
-                reporteUsuario.IdUsuario=User.Identity.GetUserId();
-                db.ReporteUsuarios.Add(reporteUsuario);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            // ejecucionproyectos busca los proyectos que se encuentran en ejecucion
+            
+                if (ModelState.IsValid)
+                {
+                    reporteUsuario.IdUsuario = User.Identity.GetUserId();
+                    db.ReporteUsuarios.Add(reporteUsuario);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
-            ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre", reporteUsuario.IdServicio);
-            return View(reporteUsuario);
+                ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
+                ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre", reporteUsuario.IdServicio);
+                return View(reporteUsuario);
+            
+            
         }
 
         // GET: ReporteUsuarios/Edit/5
