@@ -99,13 +99,16 @@
                         {
                             @Html.ActionLink("Finalizar", "EditarEstado", new { id = item.Id })
                         }
+                        @if (User.IsInRole("ADMIN"))
+                        {
+                            <a href="/Proyectos/ComoVa/@item.Id" class="btn btn-primary">Como va</a>
+                        }
                     </td>
                 </tr>
             }
         }
     </table>
 </div>
-
 <br /><br />
 <div class="container">
     <div class="row">

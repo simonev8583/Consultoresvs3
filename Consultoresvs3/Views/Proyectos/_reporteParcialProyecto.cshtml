@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Consultoresvs3.Models.ReporteProyecto>
+
+@{
+    ViewBag.Title = "Reporte Proyectos";
+}
+
+<center><h2 style="font-weight:bold;">REPORTE DE PROYECTOS</h2></center>
+
+<br />
+
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                Proyecto
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HorasInvertidas)
+            </th>
+            <th>
+                Utilidad
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorasInvertidas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Utilidad)
+                </td>
+                <td>
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img1.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img2.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img3.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img4.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+    </div>
+</div>

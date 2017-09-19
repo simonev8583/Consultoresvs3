@@ -419,6 +419,8 @@
     <Content Include="Views\Home\ReporteUsuario.cshtml" />
     <Content Include="Views\Home\_Exportado.cshtml" />
     <Content Include="Views\ReporteUsuarios\_sinproyectos.cshtml" />
+    <Content Include="Views\Proyectos\_reporteParcialProyecto.cshtml" />
+    <Content Include="Views\Proyectos\Comova.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

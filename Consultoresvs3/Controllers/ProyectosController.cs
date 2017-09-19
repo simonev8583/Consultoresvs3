@@ -195,5 +195,25 @@ namespace Consultoresvs3.Controllers
             Response.Write(sw.ToString());
             Response.End();
         }
+        public ActionResult ComoVa(int id)
+        {
+            var reporte = db.ReporteUsuarios.Where(t => t.Proyecto.Id == id).ToList();
+            int horastrabajadas = 0;
+            decimal utilidad = 0;
+            for (int i = 0; i < reporte.Count; i++)
+            {
+                horastrabajadas += reporte[i].HTrabajadas;
+                utilidad += (reporte[i].HTrabajadas * reporte[i].Usuario.ValorHoraPrestacionesSociales);
+            }
+            ReporteProyecto nuevoreporte = new ReporteProyecto();
+            nuevoreporte.HorasInvertidas = horastrabajadas;
+            Proyecto proyecto = db.Proyectos.Find(id);
+            nuevoreporte.IdProyecto = proyecto.Id;
+            nuevoreporte.Proyecto = proyecto;
+            nuevoreporte.Utilidad = (proyecto.Precio - utilidad);
+            List<ReporteProyecto> lista = new List<ReporteProyecto>();
+            lista.Add(nuevoreporte) ;
+            return View("Comova",lista);
+        }
     }
 }
