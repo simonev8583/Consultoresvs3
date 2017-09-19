@@ -42,7 +42,7 @@ namespace Consultoresvs3.Controllers
         }
         [HttpPost]
         [Authorize]
-        public ActionResult ActualizarUsuario(int? identidad, double salario, double valorhorasp, double valorhorasnp)
+        public ActionResult ActualizarUsuario(int? identidad, decimal salario, decimal valorhorasp, decimal valorhorasnp)
         {
             if (identidad == null)
             {

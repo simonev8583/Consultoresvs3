@@ -20,6 +20,16 @@
                 @Html.ActionLink("CONSULTORES", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+                @if (User.IsInRole("ADMIN"))
+                {
+
+                }
+                else
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Reporte empleado", "Index", "ReporteUsuarios")</li>
+                    </ul>
+                }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

@@ -55,7 +55,7 @@ namespace Consultoresvs3.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Precio,TiempoEstipulado,IdEmpresa,Fecha")] Proyecto proyecto)
+        public ActionResult Create([Bind(Include = "Id,Nombre,Precio,TiempoEstipulado,IdEmpresa,Fecha,FechaFin")] Proyecto proyecto)
         {
             if (ModelState.IsValid)
             {
@@ -157,7 +157,7 @@ namespace Consultoresvs3.Controllers
         {
             var reporte = db.ReporteUsuarios.Where(t => t.Proyecto.Id == id).ToList();
             int horastrabajadas = 0;
-            double utilidad = 0;
+            decimal utilidad = 0;
             for (int i = 0; i < reporte.Count; i++)
             {
                 horastrabajadas += reporte[i].HTrabajadas;

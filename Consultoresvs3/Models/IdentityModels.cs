@@ -23,9 +23,9 @@ namespace Consultoresvs3.Models
         public string FechaNacimiento { get; set; }
         [Required]
         public string Cargo { get; set; }
-        public double Salario { get; set; }
-        public double ValorHoraPrestacionesSociales { get; set; }
-        public double ValorHoraNoPrestacionSociales { get; set; }
+        public decimal Salario { get; set; }
+        public decimal ValorHoraPrestacionesSociales { get; set; }
+        public decimal ValorHoraNoPrestacionSociales { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

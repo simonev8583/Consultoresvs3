@@ -13,18 +13,25 @@ namespace Consultoresvs3.Models
         public int Id { get; set; }
         public string Nombre { get; set; }
 
-        public double Precio { get; set; }
+        [Display(Name = "Honorario del Proyecto")]
+        [DisplayFormat(DataFormatString = "{0:C2}",ApplyFormatInEditMode = false)]
+        public decimal Precio { get; set; }
 
-        [Display(Name = "Tiempo estipulado (Horas)")]
+        [Display(Name = "Tiempo Estimado (Horas)")]
         public int TiempoEstipulado { get; set; }
         //Empresa
         [Display(Name = "Empresa")]
         public int IdEmpresa { get; set; }
 
-        [Display(Name = "Fecha")]
+        [Display(Name = "Fecha de Inicio")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime Fecha { get; set; }
+
+        [Display(Name = "Fecha Estimada de Finalización")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        public DateTime FechaFin { get; set; }
 
         [Display(Name = "Estado Proyecto")]
         public int IdEstado { get; set; }

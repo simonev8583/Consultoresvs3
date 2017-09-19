@@ -3,7 +3,7 @@ namespace Consultoresvs3.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class second : DbMigration
+    public partial class first : DbMigration
     {
         public override void Up()
         {
@@ -60,10 +60,11 @@ namespace Consultoresvs3.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Nombre = c.String(),
-                        Precio = c.Double(nullable: false),
+                        Precio = c.Decimal(nullable: false, precision: 18, scale: 2),
                         TiempoEstipulado = c.Int(nullable: false),
                         IdEmpresa = c.Int(nullable: false),
                         Fecha = c.DateTime(nullable: false),
+                        FechaFin = c.DateTime(nullable: false),
                         IdEstado = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -79,7 +80,7 @@ namespace Consultoresvs3.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         IdProyecto = c.Int(nullable: false),
                         HorasInvertidas = c.Int(nullable: false),
-                        Utilidad = c.Double(nullable: false),
+                        Utilidad = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Proyectoes", t => t.IdProyecto, cascadeDelete: true)
@@ -125,9 +126,9 @@ namespace Consultoresvs3.Migrations
                         FechaIngresoEmpresa = c.String(),
                         FechaNacimiento = c.String(nullable: false),
                         Cargo = c.String(nullable: false),
-                        Salario = c.Double(nullable: false),
-                        ValorHoraPrestacionesSociales = c.Double(nullable: false),
-                        ValorHoraNoPrestacionSociales = c.Double(nullable: false),
+                        Salario = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ValorHoraPrestacionesSociales = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ValorHoraNoPrestacionSociales = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
