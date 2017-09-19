@@ -4,100 +4,130 @@
     ViewBag.Title = "Proyectos";
 }
 
-<h2 style="font-weight:bold;">Proyectos</h2>
+<center><h2 style="font-weight:bold;">PROYECTOS</h2></center>
+<div>
+    <a href="/Proyectos/Create" class="btn btn-primary">Agregar proyecto</a>
+</div>
+<br />
 
-<p>
-    @Html.ActionLink("Agregar Proyecto", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Empresa
-        </th>
-        <th>
-            Estado Proyecto
-        </th>
-        <th>
-            Proyecto
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TiempoEstipulado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaFin)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    if (item.Estado.Nombre == "Finalizado")
-    {
-        <tr class="bg-primary">
-            <td>
-                @Html.DisplayFor(modelItem => item.Empresa.NombreEmpresa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TiempoEstipulado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaFin)
-            </td>
-            <td>
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-    else
-    {
+<div class="table-responsive">
+    <table class="table">
         <tr>
-    
-        <td>
-            @Html.DisplayFor(modelItem => item.Empresa.NombreEmpresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TiempoEstipulado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaFin)
-        </td>
-        <td>
-            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
-            @if (User.IsInRole("ADMIN"))
+            <th>
+                Empresa
+            </th>
+            <th>
+                Estado Proyecto
+            </th>
+            <th>
+                Proyecto
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TiempoEstipulado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFin)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Estado.Nombre == "Finalizado")
             {
-                @Html.ActionLink("Finalizar", "EditarEstado", new { id = item.Id })
-            } 
-        </td>
-    </tr>
-    }
-}
-</table>
+                <tr class="bg-primary">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Empresa.NombreEmpresa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TiempoEstipulado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaFin)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Empresa.NombreEmpresa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TiempoEstipulado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaFin)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
+                        @if (User.IsInRole("ADMIN"))
+                        {
+                            @Html.ActionLink("Finalizar", "EditarEstado", new { id = item.Id })
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img1.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img2.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img3.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img4.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+    </div>
+</div>

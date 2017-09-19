@@ -4,15 +4,19 @@
     ViewBag.Title = "Reporte Usuarios";
 }
 
-<h2 style="font-weight:bold;">Reporte Usuarios</h2>
+<center><h2 style="font-weight:bold;">REPORTE DE EMPLEADOS</h2></center>
+<br />
 
 @if (User.IsInRole("ADMIN"))
 {
 }
 else
-{<p>
-    @Html.ActionLink("Agregar Reporte", "Create")
-</p> }
+{
+    <div>
+        <a href="/ReporteUsuarios/Create" class="btn btn-primary">Agregar reporte</a>
+    </div>
+    <br />
+}
 
 <!--menu filtros de busqueda-->
 @if (User.IsInRole("ADMIN"))
@@ -161,58 +165,87 @@ else
 
 
 <!--TABLA DONDE SE GENERAN LOS REPORTES-->
-<table class="table inicial" id="filtro">
-    <tr>
-        <th>
-            Proyecto
-        </th>
-        @if (User.IsInRole("ADMIN"))
-        {
+<div class="table-responsive">
+    <table class="table inicial" id="filtro">
+        <tr>
             <th>
-                Empleado
+                Proyecto
             </th>
-        }
-        <th>
-            @Html.DisplayNameFor(model => model.Servicio.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaReporte)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HTrabajadas)
-        </th>
-        <th></th>
-    </tr>
+            @if (User.IsInRole("ADMIN"))
+            {
+                <th>
+                    Empleado
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.Servicio.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaReporte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HTrabajadas)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
-        </td>
-        @if (User.IsInRole("ADMIN"))
+        @foreach (var item in Model)
         {
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Nombre)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+                </td>
+                @if (User.IsInRole("ADMIN"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Servicio.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaReporte)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HTrabajadas)
+                </td>
+                <td>
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                </td>
+            </tr>
         }
-        <td>
-            @Html.DisplayFor(modelItem => item.Servicio.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaReporte)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HTrabajadas)
-        </td>
-        <td>
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-</table>
+    </table>
+</div>
 
 <div>
     <center><a class="btn btn-danger" id="deshacer" style="display:none" href="~/ReporteUsuarios">Deshacer búsqueda</a></center>
+</div>
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img1.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img2.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img3.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img4.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section scripts {

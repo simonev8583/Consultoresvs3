@@ -4,34 +4,64 @@
     ViewBag.Title = "Servicios";
 }
 
-<h2 style="font-weight:bold;">Servicios</h2>
+<center><h2 style="font-weight:bold;">SERVICIOS</h2></center>
+<div>
+    <a href="/Servicios/Create" class="btn btn-primary">Agregar servicio</a>
+</div>
+<br />
 
-<p>
-    @Html.ActionLink("Agregar Servicio", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th></th>
-    </tr>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img1.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img2.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img3.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img4.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+    </div>
+</div>

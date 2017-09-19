@@ -4,8 +4,7 @@
     ViewBag.Title = "Servicios";
 }
 
-<h2>Crear Servicio</h2>
-
+<center><h2 style="font-weight:bold;">CREAR SERVICIO</h2></center>
 
 @using (Html.BeginForm()) 
 {
@@ -39,9 +38,34 @@
 }
 
 <div>
-    @Html.ActionLink("Regresar", "Index")
+    <center><a href="/Servicios" class="btn btn-primary">Regresar</a></center>
 </div>
 
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img1.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img2.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img3.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img4.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
