@@ -186,6 +186,13 @@ namespace Consultoresvs3.Controllers
         // DESACOPLE FILTROS 
         //DF => Desacople Filtro ...
 
+        // Filtrar proyectos en un intervalo de tiempo (2 fechas)
+        public dynamic DFentreFechas(DateTime fecha1,DateTime fecha2)
+        {
+            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.CompareTo(fecha1) > 0
+            && r.FechaReporte.CompareTo(fecha2) < 0);
+            return Reporte;
+        }
         // Consulta en la base de datos los reportes generados por el empleado logeado
         // actualmente y trae los reportes de un proyecto especifico
         public dynamic DFProyectoEmp(int? idProyecto)
@@ -239,7 +246,21 @@ namespace Consultoresvs3.Controllers
         // FILTROS DE BUSQUEDA 
         // Queremos mostrar la informacion que tiene cada empleado según un proyecto en especial.
 
-         // Retorna los resultados de cada consulta en la vista, y muestra los reportes 
+        // Retorna los resultados de cada consulta en la vista, y muestra los reportes
+        [HttpPost]
+        public ActionResult FiltroentreFechasAdm(DateTime fecha1,DateTime fecha2)
+        {
+            var Reporte = DFentreFechas(fecha1, fecha2);
+            return PartialView("_FiltroReporteUFechaadm", Reporte);
+
+        }
+        [HttpPost]
+        public ActionResult FiltroentreFechasEmp(DateTime fecha1, DateTime fecha2)
+        {
+            var Reporte = DFentreFechas(fecha1, fecha2);
+            return PartialView("_FiltroReporteUFechaemp", Reporte);
+
+        }
         [HttpPost]
         public ActionResult FiltroProyectoEmp(int? idProyecto)
         {
