@@ -21,13 +21,16 @@
             Proyecto
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Precio)  (Pesos)
+            @Html.DisplayNameFor(model => model.Precio)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TiempoEstipulado)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaFin)
         </th>
         <th></th>
     </tr>
@@ -46,13 +49,16 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                <span style="font-weight:bold">$</span>  @Html.DisplayFor(modelItem => item.Precio)
+                @Html.DisplayFor(modelItem => item.Precio)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TiempoEstipulado)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaFin)
             </td>
             <td>
                 @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
@@ -73,13 +79,16 @@
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>
         <td>
-            <span style="font-weight:bold">$</span>   @Html.DisplayFor(modelItem => item.Precio)
+            @Html.DisplayFor(modelItem => item.Precio)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TiempoEstipulado)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaFin)
         </td>
         <td>
             @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |

@@ -311,7 +311,7 @@ namespace Consultoresvs3.Controllers
         public ActionResult CrearReporte(int id)
         {
             var reporte = db.ReporteUsuarios.Where(t => t.Proyecto.Id == id).ToList();
-            double utilidad = 0;
+            decimal utilidad = 0;
             int horastrabajadas = 0;
             for (int i = 0; i < reporte.Count; i++)
             {

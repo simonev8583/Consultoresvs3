@@ -10,13 +10,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Proyecto.Nombre)
+            Proyecto
         </th>
         <th>
             @Html.DisplayNameFor(model => model.HorasInvertidas)
         </th>
         <th>
-            Utilidad (Pesos)
+            Utilidad
         </th>
         <th></th>
     </tr>
@@ -30,7 +30,7 @@
             @Html.DisplayFor(modelItem => item.HorasInvertidas)
         </td>
         <td>
-            <span style="font-weight:bold">$</span>   @Html.DisplayFor(modelItem => item.Utilidad)
+            @Html.DisplayFor(modelItem => item.Utilidad)
         </td>
         <td>
             @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })

@@ -17,6 +17,7 @@ namespace Consultoresvs3.Models
         [Display(Name = "Horas Invertidas")]
         public int HorasInvertidas { get; set; }
         //utilidad
-        public double Utilidad { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
+        public decimal Utilidad { get; set; }
     }
 }
