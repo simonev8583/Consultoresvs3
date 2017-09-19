@@ -4,59 +4,90 @@
     ViewBag.Title = "Empresas";
 }
 
-<h2 style="font-weight:bold;">Empresas</h2>
+<center><h2 style="font-weight:bold;">EMPRESAS</h2></center>
+<div>
+    <a href="/Empresas/Create" class="btn btn-primary">Agregar empresa</a>
+</div>
+<br />
 
-<p>
-    @Html.ActionLink("Agregar Empresa", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NIT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreEmpresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Direccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CorreoEmpresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActividadEconomica)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Telefono)
-        </th>
-        <th></th>
-    </tr>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NIT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreEmpresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorreoEmpresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActividadEconomica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NIT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombreEmpresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Direccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CorreoEmpresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActividadEconomica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefono)
-        </td>
-        <td>
-            @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NIT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreEmpresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CorreoEmpresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActividadEconomica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+
+</div>
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img1.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img2.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img3.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
+            <div class="bg-img-1">
+                <center><img src="~/Imagenes/Img4.png" style="height:250px;width:100%;" /></center>
+            </div>
+        </div>
+    </div>
+</div>
