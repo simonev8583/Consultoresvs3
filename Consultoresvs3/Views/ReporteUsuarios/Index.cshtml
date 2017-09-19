@@ -31,6 +31,7 @@ else
                 <option value="2">Empresa</option>
                 <option value="3">Fecha</option>
                 <option value="4">Proyecto</option>
+                <option value="5">Entre Fechas</option>
             </select>
         </div>
         <div class="col-md-2" style="margin-top:1%;">
@@ -48,6 +49,7 @@ else
             <select id="filtrosEmp">
                 <option value="1">Fecha</option>
                 <option value="2">Proyecto</option>
+                <option value="3">entre fechas</option>
             </select>
         </div>
         <div class="col-md-2" style="margin-top:1%;">
@@ -83,8 +85,37 @@ else
         }
     </div>   
 </form>
+<!--ENTRE FECHAS-->
+<form id="entre" style='display:none'>
+    <div class="row">
+        <!--Filtro entre fechas-->
 
-
+        <label style="font-size:25px" class="control-label col-lg-2" for="ProyectosUsuario">Entre Fechas</label>
+        <div class="col-lg-2">
+            <input type="date" id="anio1"/>
+        </div>
+        <div class="col-lg-2">
+            <input type="date" id="anio2" />
+        </div>
+        @if (User.IsInRole("ADMIN"))
+        {
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <a class="btn btn-primary entref" data-url="@Url.Content("/ReporteUsuarios/FiltroentreFechasAdm/")">Buscar</a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <a class="btn btn-primary entref" data-url="@Url.Content("/ReporteUsuarios/FiltroentreFechasEmp/")">Buscar</a>
+                </div>
+            </div>
+        }
+    </div>
+</form>
+<!--FIN ENTRE FECHAS-->
 @if (User.IsInRole("ADMIN"))
 {
     <form id="emp" style='display:none'>
@@ -285,6 +316,24 @@ else
                             });
                     });
 
+               //filtro entre fechas
+                    $('.entref').click(function () {
+                        var fecha1 = $('#anio1').val();
+                        var fecha2 = $('#anio2').val();
+                        $.ajax({
+                            method: 'POST',
+                            url: $(this).data('url'),
+                            data: { fecha1: fecha1, fecha2: fecha2 }
+                        })
+                            .done(function (data) {
+                                $('#filtro').hide();
+                                $('#filtro').html(data);
+                                $('#filtro').show('fast');
+                                $('#deshacer').show('fast');
+                            }).fail(function () {
+                                alert("error");
+                            });
+                    });
                //filtro por empresa
                     $('.empB').click(function () {
                         $.ajax({
@@ -342,6 +391,7 @@ else
             var indice = document.getElementById("filtrosAdm").value;
             var empleado = document.getElementById("form-employes");
             var empresa = document.getElementById("emp");
+            var entre = document.getElementById("entre");
             var fecha = document.getElementById("date");
             var proyecto = document.getElementById("f");
             if (indice == 1) {
@@ -349,12 +399,14 @@ else
                 empresa.style.display = 'none';
                 fecha.style.display = 'none';
                 proyecto.style.display = 'none';
+                entre.style.display = 'none';
             }
             if (indice == 2) {
                 empresa.style.display = 'block';
                 empleado.style.display = 'none';
                 fecha.style.display = 'none';
                 proyecto.style.display = 'none';
+                entre.style.display = 'none';
             }
             if (indice == 3) {
                 listyears();
@@ -362,9 +414,18 @@ else
                 empleado.style.display = 'none';
                 empresa.style.display = 'none';
                 proyecto.style.display = 'none';
+                entre.style.display = 'none';
             }
             if (indice == 4) {
                 proyecto.style.display = 'block';
+                empleado.style.display = 'none';
+                empresa.style.display = 'none';
+                fecha.style.display = 'none';
+                entre.style.display = 'none';
+            }
+            if (indice == 5) {
+                entre.style.display = 'block';
+                proyecto.style.display = 'none';
                 empleado.style.display = 'none';
                 empresa.style.display = 'none';
                 fecha.style.display = 'none';
@@ -377,14 +438,22 @@ else
             var indice = document.getElementById("filtrosEmp").value;
             var fecha = document.getElementById("date");
             var proyecto = document.getElementById("f");
+            var fe = document.getElementById("entre");
             if (indice == 1) {
                 listyears();
                 fecha.style.display = 'block';
                 proyecto.style.display = 'none';
+                fe.style.display = 'none';
             }
             if (indice == 2) {
                 proyecto.style.display = 'block';
                 fecha.style.display = 'none';
+                fe.style.display = 'none';
+            }
+            if (indice == 3) {
+                proyecto.style.display = 'none';
+                fecha.style.display = 'none';
+                fe.style.display = 'block';
             }
         }
     </script>
