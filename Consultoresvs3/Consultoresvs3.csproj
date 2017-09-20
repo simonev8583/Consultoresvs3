@@ -205,6 +205,10 @@
     <Compile Include="Migrations\201709191556426_first.Designer.cs">
       <DependentUpon>201709191556426_first.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709201619277_migracionproyectos.cs" />
+    <Compile Include="Migrations\201709201619277_migracionproyectos.Designer.cs">
+      <DependentUpon>201709201619277_migracionproyectos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Empresa.cs" />
@@ -434,6 +438,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709191556426_first.resx">
       <DependentUpon>201709191556426_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709201619277_migracionproyectos.resx">
+      <DependentUpon>201709201619277_migracionproyectos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

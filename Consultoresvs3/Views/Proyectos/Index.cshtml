@@ -29,6 +29,9 @@
                 @Html.DisplayNameFor(model => model.TiempoEstipulado)
             </th>
             <th>
+                Horas Trabajadas
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Fecha)
             </th>
             <th>
@@ -62,6 +65,9 @@
                         @Html.DisplayFor(modelItem => item.TiempoEstipulado)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.HorasTrabajdas)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Fecha)
                     </td>
                     <td>
@@ -90,6 +96,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TiempoEstipulado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HorasTrabajdas)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Fecha)

@@ -108,10 +108,10 @@ namespace Consultoresvs3.Controllers
                 {
                     reporteUsuario.IdUsuario = User.Identity.GetUserId();
                     db.ReporteUsuarios.Add(reporteUsuario);
+                db.Proyectos.Find(reporteUsuario.IdProyecto).HorasTrabajdas += reporteUsuario.HTrabajadas;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-
                 ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
                 ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre", reporteUsuario.IdServicio);
                 return View(reporteUsuario);
