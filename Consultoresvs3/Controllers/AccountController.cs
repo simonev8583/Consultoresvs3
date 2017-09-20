@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Consultoresvs3.Models;
 using System.Data.Entity;
 
+
 namespace Consultoresvs3.Controllers
 {
     [Authorize]
@@ -420,6 +421,9 @@ namespace Consultoresvs3.Controllers
                 user.PasswordHash = user.Nombre + user.Identificacion;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
+                string txtMessage= "Su nueva contraseña es: "+ user.PasswordHash+" si desea cambiarla puedes iniciar sesion y dirigirse a su perfil.";
+                Tools tools = new Tools();
+                tools.SendEmail(correo, "Olvido de contraseña", txtMessage);
 
                 return PartialView("_Recuperarcontrasena");
             }

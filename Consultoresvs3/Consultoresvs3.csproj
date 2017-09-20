@@ -198,6 +198,7 @@
     <Compile Include="Controllers\ReporteProyectoesController.cs" />
     <Compile Include="Controllers\ReporteUsuariosController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
+    <Compile Include="Controllers\Tools.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
