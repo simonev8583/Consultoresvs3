@@ -405,6 +405,7 @@ namespace Consultoresvs3.Controllers
         {
             return View();
         }
+        [HttpPost]
         public ActionResult Recuperarcontrasena(string correo)
         {
             var email = db.Users.Where(r => r.Email.Equals(correo));
