@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Consultoresvs3.Models.ReporteProyecto>
 
 @{
-    ViewBag.Title = "Reporte Proyectos";
+    ViewBag.Title = "Proyecto";
 }
 
-<center><h2 style="font-weight:bold;">REPORTE DE PROYECTOS</h2></center>
+<center><h2 style="font-weight:bold;">PROYECTO</h2></center>
 
 <br />
 
@@ -20,7 +20,6 @@
             <th>
                 Utilidad
             </th>
-            <th></th>
         </tr>
 
         @foreach (var item in Model)
@@ -34,9 +33,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Utilidad)
-                </td>
-                <td>
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
                 </td>
             </tr>
         }

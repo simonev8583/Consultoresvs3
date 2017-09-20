@@ -34,7 +34,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.FechaFin)
             </th>
+            <th>
+                
+            </th>
             <th></th>
+
         </tr>
 
         @foreach (var item in Model)
@@ -94,16 +98,19 @@
                         @Html.DisplayFor(modelItem => item.FechaFin)
                     </td>
                     <td>
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
-                        @if (User.IsInRole("ADMIN"))
-                        {
-                            @Html.ActionLink("Finalizar", "EditarEstado", new { id = item.Id })
-                        }
                         @if (User.IsInRole("ADMIN"))
                         {
                             <a href="/Proyectos/ComoVa/@item.Id" class="btn btn-primary">Como va</a>
                         }
                     </td>
+                    <td>
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
+                        @if (User.IsInRole("ADMIN"))
+                        {
+                            @Html.ActionLink("Finalizar", "EditarEstado", new { id = item.Id })
+                        }
+                    </td>
+
                 </tr>
             }
         }
