@@ -19,6 +19,9 @@ namespace Consultoresvs3.Models
 
         [Display(Name = "Tiempo Estimado (Horas)")]
         public int TiempoEstipulado { get; set; }
+        //Horas totales trabajadas
+        [Display(Name = "Horas Trabajadas")]
+        public int HorasTrabajdas { get; set; }
         //Empresa
         [Display(Name = "Empresa")]
         public int IdEmpresa { get; set; }

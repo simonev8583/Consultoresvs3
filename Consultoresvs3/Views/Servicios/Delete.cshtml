@@ -4,6 +4,7 @@
     ViewBag.Title = "Servicios";
 }
 
+<br />
 <center><h2 style="font-weight:bold;">ELIMINAR SERVICIO</h2></center>
 
 <h3>Estas seguro que quieres eliminar este registro?</h3>
@@ -31,34 +32,31 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            <a href="/Servicios" class="btn btn-primary">Regresar</a>
-        </div>
+        <center>
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                <a href="/Servicios" class="btn btn-primary">Regresar</a>
+            </div>
+        </center>
+
     }
 </div>
 
 <br /><br />
 <div class="container">
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
-            <div class="bg-img-1">
-                <center><img src="~/Imagenes/Img1.png" style="height:250px;width:100%;" /></center>
+        <div class="col-lg-3 col-md-3 col-xs-6 col-sm-3">
+            <div class="div-bottom">
+                <div class="bg-img-1">
+                    <center><img src="~/Imagenes/Img1.png" class="img-bottom" /></center>
+                </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
-            <div class="bg-img-1">
-                <center><img src="~/Imagenes/Img2.png" style="height:250px;width:100%;" /></center>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
-            <div class="bg-img-1">
-                <center><img src="~/Imagenes/Img3.png" style="height:250px;width:100%;" /></center>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-6">
-            <div class="bg-img-1">
-                <center><img src="~/Imagenes/Img4.png" style="height:250px;width:100%;" /></center>
+        <div class="col-lg-offset-6 col-md-offset-6 col-sm-offset-6 col-lg-3 col-md-3 col-xs-6 col-sm-3">
+            <div class="div-bottom">
+                <div class="bg-img-1">
+                    <center><img src="~/Imagenes/Img4.png" class="img-bottom" /></center>
+                </div>
             </div>
         </div>
     </div>
