@@ -187,10 +187,19 @@ namespace Consultoresvs3.Controllers
         //DF => Desacople Filtro ...
 
         // Filtrar proyectos en un intervalo de tiempo (2 fechas)
-        public dynamic DFentreFechas(DateTime fecha1,DateTime fecha2)
+        public dynamic DFentreFechasAdm(DateTime fecha1,DateTime fecha2)
         {
             var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.CompareTo(fecha1) > 0
-            && r.FechaReporte.CompareTo(fecha2) < 0);
+            && r.FechaReporte.CompareTo(fecha2) < 0).Include(r => r.Usuario)
+                .Include(r => r.Proyecto).Include(r => r.Servicio)
+                .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id); 
+            return Reporte;
+        }
+        public dynamic DFentreFechasEmp(DateTime fecha1, DateTime fecha2)
+        {
+            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.CompareTo(fecha1) > 0
+            && r.FechaReporte.CompareTo(fecha2) < 0).Include(r => r.Proyecto).Include(r => r.Servicio)
+                .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id); 
             return Reporte;
         }
         // Consulta en la base de datos los reportes generados por el empleado logeado
@@ -250,14 +259,14 @@ namespace Consultoresvs3.Controllers
         [HttpPost]
         public ActionResult FiltroentreFechasAdm(DateTime fecha1,DateTime fecha2)
         {
-            var Reporte = DFentreFechas(fecha1, fecha2);
+            var Reporte = DFentreFechasAdm(fecha1, fecha2);
             return PartialView("_FiltroReporteUFechaadm", Reporte);
 
         }
         [HttpPost]
         public ActionResult FiltroentreFechasEmp(DateTime fecha1, DateTime fecha2)
         {
-            var Reporte = DFentreFechas(fecha1, fecha2);
+            var Reporte = DFentreFechasEmp(fecha1, fecha2);
             return PartialView("_FiltroReporteUFechaemp", Reporte);
 
         }
