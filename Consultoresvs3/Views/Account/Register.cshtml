@@ -3,7 +3,9 @@
     ViewBag.Title = "Registrarse";
 }
 
-<h2>@ViewBag.Title.</h2>
+<br />
+<center><h2 style="font-weight:bold">@ViewBag.Title.</h2></center>
+
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -65,6 +67,26 @@
         </div>
     </div>
 }
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-xs-6 col-sm-3">
+            <div class="div-bottom">
+                <div class="bg-img-1">
+                    <center><img src="~/Imagenes/Img3.png" class="img-bottom" /></center>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-offset-6 col-md-offset-6 col-sm-offset-6 col-lg-3 col-md-3 col-xs-6 col-sm-3">
+            <div class="div-bottom">
+                <div class="bg-img-1">
+                    <center><img src="~/Imagenes/Img2.png" class="img-bottom" /></center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

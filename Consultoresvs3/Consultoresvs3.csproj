@@ -425,6 +425,7 @@
     <Content Include="Views\ReporteUsuarios\_sinproyectos.cshtml" />
     <Content Include="Views\Proyectos\_reporteParcialProyecto.cshtml" />
     <Content Include="Views\Proyectos\Comova.cshtml" />
+    <Content Include="Views\Account\_Recuperarcontrasena.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
