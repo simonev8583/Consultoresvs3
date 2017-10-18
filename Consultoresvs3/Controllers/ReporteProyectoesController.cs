@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 
 namespace Consultoresvs3.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class ReporteProyectoesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -143,14 +144,19 @@ namespace Consultoresvs3.Controllers
             grid.DataSource = from data in reporte
                               select new
                               {
+                                  NITEmpresa=data.Proyecto.Empresa.NIT,
+                                  Empresa= data.Proyecto.Empresa.NombreEmpresa,
                                   Proyecto = data.Proyecto.Nombre,
+                                  FechaI = data.Proyecto.Fecha,
+                                  FechaFin=data.Proyecto.FechaFin,
+                                  TiempoEstipulado=data.Proyecto.TiempoEstipulado,
                                   HorasInvertidas = data.HorasInvertidas,
                                   Utilidad = data.Utilidad
                               };
             grid.DataBind();
             Response.ClearContent();
             Response.ContentType = "application/vnd.ms-excel";
-            Response.AddHeader("Content-Disposition", "attachment; filename=excelTest.xls");
+            Response.AddHeader("Content-Disposition", "attachment; filename=ReporteProyectos.xls");
             StringWriter sw = new StringWriter();
             HtmlTextWriter htmlwriter = new HtmlTextWriter(sw);
             grid.RenderControl(htmlwriter);
