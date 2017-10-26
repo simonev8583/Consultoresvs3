@@ -187,7 +187,7 @@ public class ProyectosController : Controller
                                   FechaI=data.Fecha,
                                   FechaFin=data.FechaFin,
                                   HorasEstipuladas=data.TiempoEstipulado,
-                                  HorasTrabajadas=data.HorasTrabajdas
+                                  HorasTrabajadas=data.HorasTrabajdas,
                                   Empresa = data.Empresa.NombreEmpresa
                               };
             grid.DataBind();

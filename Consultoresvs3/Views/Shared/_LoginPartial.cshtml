@@ -15,7 +15,8 @@
                 <li><a href="~/Empresas">Empresas</a></li>
                 <li><a href="~/Proyectos">Proyectos</a></li>
                 <li><a href="~/Servicios">Servicios</a></li>
-                <li><a href="~/Home/ActualizarUsuario">Actualizar empleado</a></li>
+                <li><a href="~/Account/Register">Registrar empleado</a></li>
+                <li><a href="~/Home/ActualizarUsuario">Actualizar empleado</a></li>     
             </ul>
         </li>
         <li>
@@ -52,7 +53,6 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
