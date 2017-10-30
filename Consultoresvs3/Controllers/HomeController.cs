@@ -93,15 +93,20 @@ namespace Consultoresvs3.Controllers
             grid.DataSource = from data in reporte
                               select new
                               {
-                                  Usuario = data.Usuario.Nombre,
                                   Identidad = data.Usuario.Identificacion,
+                                  Usuario = data.Usuario.Nombre,
+                                  UsuarioApellido = data.Usuario.Apellido,
+                                  UsuarioCargo = data.Usuario.Cargo,
                                   Proyecto = data.Proyecto.Nombre,
+                                  Proyectofechai = data.Proyecto.Fecha,
+                                  Proyectofechafin = data.Proyecto.FechaFin,
+                                  TiempoEstipulado = data.Proyecto.TiempoEstipulado,
                                   HorasTrabajdas = data.HTrabajadas
                               };
             grid.DataBind();
             Response.ClearContent();
             Response.ContentType = "application/vnd.ms-excel";
-            Response.AddHeader("Content-Disposition", "attachment; filename=excelTest.xls");
+            Response.AddHeader("Content-Disposition", "attachment; filename=ReporteUsuario.csv");//.xls
             StringWriter sw = new StringWriter();
             HtmlTextWriter htmlwriter = new HtmlTextWriter(sw);
             grid.RenderControl(htmlwriter);
