@@ -106,7 +106,7 @@ namespace Consultoresvs3.Controllers
             grid.DataBind();
             Response.ClearContent();
             Response.ContentType = "application/vnd.ms-excel";
-            Response.AddHeader("Content-Disposition", "attachment; filename=ReporteUsuario.csv");//.xls
+            Response.AddHeader("Content-Disposition", "attachment; filename=ReporteUsuario.xls");
             StringWriter sw = new StringWriter();
             HtmlTextWriter htmlwriter = new HtmlTextWriter(sw);
             grid.RenderControl(htmlwriter);
