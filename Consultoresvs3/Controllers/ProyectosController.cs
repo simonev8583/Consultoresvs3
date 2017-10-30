@@ -12,8 +12,9 @@ using System.IO;
 using System.Web.UI;
 
 namespace Consultoresvs3.Controllers
-{
-    public class ProyectosController : Controller
+{ 
+    [Authorize(Roles = "ADMIN")]
+public class ProyectosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -183,12 +184,16 @@ namespace Consultoresvs3.Controllers
                                   Nombre = data.Nombre,
                                   Estado = data.Estado.Nombre,
                                   Precio = data.Precio,
+                                  FechaI=data.Fecha,
+                                  FechaFin=data.FechaFin,
+                                  HorasEstipuladas=data.TiempoEstipulado,
+                                  HorasTrabajadas=data.HorasTrabajdas,
                                   Empresa = data.Empresa.NombreEmpresa
                               };
             grid.DataBind();
             Response.ClearContent();
             Response.ContentType = "application/vnd.ms-excel";
-            Response.AddHeader("Content-Disposition", "attachment; filename=excelTest.xls");
+            Response.AddHeader("Content-Disposition", "attachment; filename=Proyectos.xls");
             StringWriter sw = new StringWriter();
             HtmlTextWriter htmlwriter = new HtmlTextWriter(sw);
             grid.RenderControl(htmlwriter);

@@ -10,6 +10,7 @@ using Consultoresvs3.Models;
 
 namespace Consultoresvs3.Controllers
 {
+    [Authorize(Roles ="ADMIN")]
     public class ServiciosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
