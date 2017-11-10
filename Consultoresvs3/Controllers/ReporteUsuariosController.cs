@@ -189,16 +189,16 @@ namespace Consultoresvs3.Controllers
         // Filtrar proyectos en un intervalo de tiempo (2 fechas)
         public dynamic DFentreFechasAdm(DateTime fecha1,DateTime fecha2)
         {
-            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.CompareTo(fecha1) > 0
-            && r.FechaReporte.CompareTo(fecha2) < 0).Include(r => r.Usuario)
+            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.CompareTo(fecha1) >= 0
+            && r.FechaReporte.CompareTo(fecha2) <= 0).Include(r => r.Usuario)
                 .Include(r => r.Proyecto).Include(r => r.Servicio)
                 .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id); 
             return Reporte;
         }
         public dynamic DFentreFechasEmp(DateTime fecha1, DateTime fecha2)
         {
-            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.CompareTo(fecha1) > 0
-            && r.FechaReporte.CompareTo(fecha2) < 0).Include(r => r.Proyecto).Include(r => r.Servicio)
+            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.CompareTo(fecha1) >= 0
+            && r.FechaReporte.CompareTo(fecha2) <= 0).Include(r => r.Proyecto).Include(r => r.Servicio)
                 .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id); 
             return Reporte;
         }

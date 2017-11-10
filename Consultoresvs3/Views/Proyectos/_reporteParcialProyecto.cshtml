@@ -12,10 +12,28 @@
     <table class="table">
         <tr>
             <th>
+                Empresa
+            </th>
+            <th>
                 Proyecto
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HorasInvertidas)
+                Estado
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Fecha Inicio
+            </th>
+            <th>
+                Fecha Fin
+            </th>
+            <th>
+                Horas Trabajadas
+            </th>
+            <th>
+                Horas Estipuladas
             </th>
             <th>
                 Utilidad
@@ -27,10 +45,28 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Proyecto.Empresa.NombreEmpresa)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Proyecto.Estado.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proyecto.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proyecto.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proyecto.FechaFin)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.HorasInvertidas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proyecto.TiempoEstipulado)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Utilidad)
@@ -38,7 +74,6 @@
 
             </tr>
         }
-
     </table>
 </div>
 
