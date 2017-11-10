@@ -3,90 +3,95 @@
     ViewBag.Title = "Registrar";
 }
 
-<br />
-<center><h2 style="font-weight:bold">@ViewBag.Title.</h2></center>
-
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@if (User.IsInRole("ADMIN"))
 {
-    @Html.AntiForgeryToken()
-    <h4>Registre un nuevo empleado.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    <br />
+    <center><h2 style="font-weight:bold">@ViewBag.Title.</h2></center>
+
+
+    using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Registre un nuevo empleado.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Apellido, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Apellido, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Identificacion, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Identificacion, new { @class = "form-control", @id = "Fnac" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Identificacion, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Identificacion, new { @class = "form-control", @id = "Fnac" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.FechaNacimiento, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FechaNacimiento, new { @class = "form-control", @id = "datetimepicker1" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.FechaNacimiento, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FechaNacimiento, new { @class = "form-control", @id = "datetimepicker1" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Cargo, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Cargo, new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Cargo, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Cargo, new { @class = "form-control" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Registrar" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Registrar" />
+            </div>
+        </div>
+    }
+
+    <br /><br />
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-xs-6 col-sm-3">
+                <div class="div-bottom">
+                    <div class="bg-img-1">
+                        <center><img src="~/Imagenes/Img3.png" class="img-bottom" /></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-offset-6 col-md-offset-6 col-sm-offset-6 col-lg-3 col-md-3 col-xs-6 col-sm-3">
+                <div class="div-bottom">
+                    <div class="bg-img-1">
+                        <center><img src="~/Imagenes/Img2.png" class="img-bottom" /></center>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 }
 
-<br /><br />
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3 col-md-3 col-xs-6 col-sm-3">
-            <div class="div-bottom">
-                <div class="bg-img-1">
-                    <center><img src="~/Imagenes/Img3.png" class="img-bottom" /></center>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-offset-6 col-md-offset-6 col-sm-offset-6 col-lg-3 col-md-3 col-xs-6 col-sm-3">
-            <div class="div-bottom">
-                <div class="bg-img-1">
-                    <center><img src="~/Imagenes/Img2.png" class="img-bottom" /></center>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
