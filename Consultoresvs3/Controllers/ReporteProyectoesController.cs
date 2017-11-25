@@ -144,12 +144,12 @@ namespace Consultoresvs3.Controllers
             grid.DataSource = from data in reporte
                               select new
                               {
-                                  NITEmpresa=data.Proyecto.Empresa.NIT,
-                                  Empresa= data.Proyecto.Empresa.NombreEmpresa,
+                                  NITEmpresa = data.Proyecto.Empresa.NIT,
+                                  Empresa = data.Proyecto.Empresa.NombreEmpresa,
                                   Proyecto = data.Proyecto.Nombre,
                                   FechaI = data.Proyecto.Fecha,
-                                  FechaFin=data.Proyecto.FechaFin,
-                                  TiempoEstipulado=data.Proyecto.TiempoEstipulado,
+                                  FechaFin = data.Proyecto.FechaFin,
+                                  TiempoEstipulado = data.Proyecto.TiempoEstipulado,
                                   HorasInvertidas = data.HorasInvertidas,
                                   Utilidad = data.Utilidad
                               };

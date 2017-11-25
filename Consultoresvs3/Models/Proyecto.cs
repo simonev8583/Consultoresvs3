@@ -14,14 +14,14 @@ namespace Consultoresvs3.Models
         public string Nombre { get; set; }
 
         [Display(Name = "Honorario del Proyecto")]
-        [DisplayFormat(DataFormatString = "{0:C2}",ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal Precio { get; set; }
 
         [Display(Name = "Tiempo Estimado (Horas)")]
-        public int TiempoEstipulado { get; set; }
+        public decimal TiempoEstipulado { get; set; }
         //Horas totales trabajadas
         [Display(Name = "Horas Trabajadas")]
-        public int HorasTrabajdas { get; set; }
+        public decimal HorasTrabajdas { get; set; }
         //Empresa
         [Display(Name = "Empresa")]
         public int IdEmpresa { get; set; }

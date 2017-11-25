@@ -34,6 +34,7 @@ namespace Consultoresvs3.Models
             // Agregar aquí notificaciones personalizadas de usuario
             return userIdentity;
         }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

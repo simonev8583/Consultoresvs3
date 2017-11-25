@@ -3,7 +3,7 @@ namespace Consultoresvs3.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class first : DbMigration
+    public partial class firstmigration : DbMigration
     {
         public override void Up()
         {
@@ -61,7 +61,8 @@ namespace Consultoresvs3.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Nombre = c.String(),
                         Precio = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        TiempoEstipulado = c.Int(nullable: false),
+                        TiempoEstipulado = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        HorasTrabajdas = c.Decimal(nullable: false, precision: 18, scale: 2),
                         IdEmpresa = c.Int(nullable: false),
                         Fecha = c.DateTime(nullable: false),
                         FechaFin = c.DateTime(nullable: false),
@@ -79,7 +80,7 @@ namespace Consultoresvs3.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         IdProyecto = c.Int(nullable: false),
-                        HorasInvertidas = c.Int(nullable: false),
+                        HorasInvertidas = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Utilidad = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
                 .PrimaryKey(t => t.Id)
@@ -92,7 +93,7 @@ namespace Consultoresvs3.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         FechaReporte = c.DateTime(nullable: false),
-                        HTrabajadas = c.Int(nullable: false),
+                        HTrabajadas = c.Decimal(nullable: false, precision: 18, scale: 2),
                         IdServicio = c.Int(nullable: false),
                         IdProyecto = c.Int(nullable: false),
                         IdUsuario = c.String(maxLength: 128),
