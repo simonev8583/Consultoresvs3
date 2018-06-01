@@ -192,6 +192,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\EstadoProyectosController.cs" />
+    <Compile Include="Controllers\FaseProyectosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProyectosController.cs" />
@@ -202,14 +203,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711250550158_first-migration.cs" />
-    <Compile Include="Migrations\201711250550158_first-migration.Designer.cs">
-      <DependentUpon>201711250550158_first-migration.cs</DependentUpon>
+    <Compile Include="Migrations\201709191556426_first.cs" />
+    <Compile Include="Migrations\201709191556426_first.Designer.cs">
+      <DependentUpon>201709191556426_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709201619277_migracionproyectos.cs" />
+    <Compile Include="Migrations\201709201619277_migracionproyectos.Designer.cs">
+      <DependentUpon>201709201619277_migracionproyectos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805171910015_secondMigration.cs" />
+    <Compile Include="Migrations\201805171910015_secondMigration.Designer.cs">
+      <DependentUpon>201805171910015_secondMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\EstadoProyecto.cs" />
+    <Compile Include="Models\FaseProyecto.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Proyecto.cs" />
@@ -423,6 +433,11 @@
     <Content Include="Views\Proyectos\_reporteParcialProyecto.cshtml" />
     <Content Include="Views\Proyectos\Comova.cshtml" />
     <Content Include="Views\Account\_Recuperarcontrasena.cshtml" />
+    <Content Include="Views\FaseProyectos\Create.cshtml" />
+    <Content Include="Views\FaseProyectos\Delete.cshtml" />
+    <Content Include="Views\FaseProyectos\Details.cshtml" />
+    <Content Include="Views\FaseProyectos\Edit.cshtml" />
+    <Content Include="Views\FaseProyectos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -434,8 +449,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711250550158_first-migration.resx">
-      <DependentUpon>201711250550158_first-migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709191556426_first.resx">
+      <DependentUpon>201709191556426_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709201619277_migracionproyectos.resx">
+      <DependentUpon>201709201619277_migracionproyectos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805171910015_secondMigration.resx">
+      <DependentUpon>201805171910015_secondMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

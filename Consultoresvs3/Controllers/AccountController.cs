@@ -25,7 +25,7 @@ namespace Consultoresvs3.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -37,9 +37,9 @@ namespace Consultoresvs3.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set
-            {
-                _signInManager = value;
+            private set 
+            { 
+                _signInManager = value; 
             }
         }
 
@@ -123,7 +123,7 @@ namespace Consultoresvs3.Controllers
             // Si un usuario introduce códigos incorrectos durante un intervalo especificado de tiempo, la cuenta del usuario 
             // se bloqueará durante un período de tiempo especificado. 
             // Puede configurar el bloqueo de la cuenta en IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,12 +155,11 @@ namespace Consultoresvs3.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellido = model.Apellido, Identificacion = model.Identificacion, FechaIngresoEmpresa = model.FechaIngresoEmpresa, FechaNacimiento = model.FechaNacimiento, Salario = model.Salario, Cargo = model.Cargo, ValorHoraNoPrestacionSociales = model.ValorHoraNoPrestacionSociales, ValorHoraPrestacionesSociales = model.ValorHoraPrestacionesSociales };
-                user.EmailConfirmed = true;
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
+                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar correo electrónico con este vínculo
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -215,10 +214,10 @@ namespace Consultoresvs3.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Enviar correo electrónico con este vínculo
-                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code });
-                await UserManager.SendEmailAsync(user.Id, "Restablecer contraseña", "Para restablecer la contraseña, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
-                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                // await UserManager.SendEmailAsync(user.Id, "Restablecer contraseña", "Para restablecer la contraseña, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
+                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
@@ -411,25 +410,25 @@ namespace Consultoresvs3.Controllers
         {
             var email = db.Users.Where(r => r.Email.Equals(correo));
             var userId = from p in db.Users
-                         where (p.Email.Equals(correo))
-                         select new { Id = p.Id };
+                            where ( p.Email.Equals(correo)) 
+                            select new {Id= p.Id };
             if (correo.Equals(null) || email.Equals(null))
             {
                 return View("error");
             }
             else
-            {
+            {      
                 ApplicationUser user = db.Users.Find(userId);
                 user.PasswordHash = user.Nombre + user.Identificacion;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                string txtMessage = "Su nueva contraseña es: " + user.PasswordHash + " si desea cambiarla puedes iniciar sesion y dirigirse a su perfil.";
+                string txtMessage= "Su nueva contraseña es: "+ user.PasswordHash+" si desea cambiarla puedes iniciar sesion y dirigirse a su perfil.";
                 Tools tools = new Tools();
                 tools.SendEmail(correo, "Olvido de contraseña", txtMessage);
 
                 return PartialView("_Recuperarcontrasena");
             }
-
+            
         }
         protected override void Dispose(bool disposing)
         {

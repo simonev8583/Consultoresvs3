@@ -34,7 +34,6 @@ namespace Consultoresvs3.Models
             // Agregar aquí notificaciones personalizadas de usuario
             return userIdentity;
         }
-
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -46,6 +45,7 @@ namespace Consultoresvs3.Models
         public DbSet<ReporteProyecto> ReporteProyectos { get; set; }
         public DbSet<ReporteUsuario> ReporteUsuarios { get; set; }
         public DbSet<Servicio> Servicios { get; set; }
+        public DbSet<FaseProyecto> FaseProyectos { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

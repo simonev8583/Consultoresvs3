@@ -15,7 +15,7 @@ namespace Consultoresvs3.Models
         public virtual Proyecto Proyecto { get; set; }
         //Horas Gastadas 
         [Display(Name = "Horas Invertidas")]
-        public decimal HorasInvertidas { get; set; }
+        public int HorasInvertidas { get; set; }
         //utilidad
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal Utilidad { get; set; }

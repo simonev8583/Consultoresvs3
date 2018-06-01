@@ -12,9 +12,9 @@ using System.IO;
 using System.Web.UI;
 
 namespace Consultoresvs3.Controllers
-{
+{ 
     [Authorize(Roles = "ADMIN")]
-    public class ProyectosController : Controller
+public class ProyectosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -157,7 +157,7 @@ namespace Consultoresvs3.Controllers
         public ActionResult CrearReporte(int id)
         {
             var reporte = db.ReporteUsuarios.Where(t => t.Proyecto.Id == id).ToList();
-            decimal horastrabajadas = 0;
+            int horastrabajadas = 0;
             decimal utilidad = 0;
             for (int i = 0; i < reporte.Count; i++)
             {
@@ -184,10 +184,10 @@ namespace Consultoresvs3.Controllers
                                   Nombre = data.Nombre,
                                   Estado = data.Estado.Nombre,
                                   Precio = data.Precio,
-                                  FechaI = data.Fecha,
-                                  FechaFin = data.FechaFin,
-                                  HorasEstipuladas = data.TiempoEstipulado,
-                                  HorasTrabajadas = data.HorasTrabajdas,
+                                  FechaI=data.Fecha,
+                                  FechaFin=data.FechaFin,
+                                  HorasEstipuladas=data.TiempoEstipulado,
+                                  HorasTrabajadas=data.HorasTrabajdas,
                                   Empresa = data.Empresa.NombreEmpresa
                               };
             grid.DataBind();
@@ -203,7 +203,7 @@ namespace Consultoresvs3.Controllers
         public ActionResult ComoVa(int id)
         {
             var reporte = db.ReporteUsuarios.Where(t => t.Proyecto.Id == id).ToList();
-            decimal horastrabajadas = 0;
+            int horastrabajadas = 0;
             decimal utilidad = 0;
             for (int i = 0; i < reporte.Count; i++)
             {
@@ -217,8 +217,8 @@ namespace Consultoresvs3.Controllers
             nuevoreporte.Proyecto = proyecto;
             nuevoreporte.Utilidad = (proyecto.Precio - utilidad);
             List<ReporteProyecto> lista = new List<ReporteProyecto>();
-            lista.Add(nuevoreporte);
-            return View("Comova", lista);
+            lista.Add(nuevoreporte) ;
+            return View("Comova",lista);
         }
     }
 }

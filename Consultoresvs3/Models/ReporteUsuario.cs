@@ -18,8 +18,9 @@ namespace Consultoresvs3.Models
         public DateTime FechaReporte { get; set; }
         [Range(1, 10, ErrorMessage = "{0} las horas deben estar entre {1} y {2} .")]
         [Display(Name = "Horas Trabajadas")]
-        public decimal HTrabajadas { get; set; }
+        public int HTrabajadas { get; set; }
         public int IdServicio { get; set; }
+        public int IdFase { get; set; }
 
         [ForeignKey("IdServicio")]
         public virtual Servicio Servicio { get; set; }
@@ -34,5 +35,8 @@ namespace Consultoresvs3.Models
         public string IdUsuario { get; set; }
         [ForeignKey("IdUsuario")]
         public virtual ApplicationUser Usuario { get; set; }
+
+        [ForeignKey("IdFase")]
+        public virtual FaseProyecto FaseProyecto { get; set; }
     }
 }
