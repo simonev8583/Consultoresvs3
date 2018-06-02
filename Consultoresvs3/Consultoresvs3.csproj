@@ -211,9 +211,9 @@
     <Compile Include="Migrations\201709201619277_migracionproyectos.Designer.cs">
       <DependentUpon>201709201619277_migracionproyectos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805171910015_secondMigration.cs" />
-    <Compile Include="Migrations\201805171910015_secondMigration.Designer.cs">
-      <DependentUpon>201805171910015_secondMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201806011519581_second.cs" />
+    <Compile Include="Migrations\201806011519581_second.Designer.cs">
+      <DependentUpon>201806011519581_second.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -242,10 +242,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imagenes\banner.png" />
-    <Content Include="Imagenes\Img4.png" />
-    <Content Include="Imagenes\Img1.png" />
-    <Content Include="Imagenes\Img3.png" />
-    <Content Include="Imagenes\Img2.png" />
+    <Content Include="Imagenes\Img1.jpg" />
+    <Content Include="Imagenes\Img2.jpg" />
+    <Content Include="Imagenes\Img3.jpg" />
+    <Content Include="Imagenes\Img4.jpg" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -455,8 +455,8 @@
     <EmbeddedResource Include="Migrations\201709201619277_migracionproyectos.resx">
       <DependentUpon>201709201619277_migracionproyectos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805171910015_secondMigration.resx">
-      <DependentUpon>201805171910015_secondMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806011519581_second.resx">
+      <DependentUpon>201806011519581_second.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
