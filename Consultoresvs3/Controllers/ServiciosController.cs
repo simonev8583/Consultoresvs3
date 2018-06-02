@@ -104,32 +104,6 @@ namespace Consultoresvs3.Controllers
             }
             return View(servicio);
         }
-        [HttpPost]
-        public ActionResult Recuperarcontrasena(string correo)
-        {
-            var email = db.Users.Where(r => r.Email.Equals(correo));
-            var userId = from p in db.Users
-                         where (p.Email.Equals(correo))
-                         select new { Id = p.Id };
-            if (correo.Equals(null) || email.Equals(null))
-            {
-                return View("error");
-            }
-            else
-            {
-                ApplicationUser user = db.Users.Find(userId);
-                user.PasswordHash = user.Nombre + user.Identificacion;
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                string txtMessage = "Su nueva contraseña es: " + user.PasswordHash + " si desea cambiarla puedes iniciar sesion y dirigirse a su perfil.";
-                Tools tools = new Tools();
-                tools.SendEmail(correo, "Olvido de contraseña", txtMessage);
-
-                return PartialView("_Recuperarcontrasena");
-            }
-
-        }
-
         // POST: Servicios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -140,7 +114,7 @@ namespace Consultoresvs3.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+    
         protected override void Dispose(bool disposing)
         {
             if (disposing)

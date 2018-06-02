@@ -6,6 +6,9 @@
             <h7>Fecha</h7>
         </th>
         <th>
+            <h7>Fase del proyecto</h7>
+        </th>
+        <th>
             <h7>Proyecto</h7>
         </th>
         <th>
@@ -24,31 +27,32 @@
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaReporte)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Proyecto.Empresa.NombreEmpresa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Servicio.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HTrabajadas)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaReporte)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FaseProyecto.NombreFase)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proyecto.Empresa.NombreEmpresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Servicio.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HTrabajadas)
+        </td>
+        <td>
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+        </td>
+    </tr>
     }
 </table>
 

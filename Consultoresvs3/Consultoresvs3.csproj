@@ -438,6 +438,8 @@
     <Content Include="Views\FaseProyectos\Details.cshtml" />
     <Content Include="Views\FaseProyectos\Edit.cshtml" />
     <Content Include="Views\FaseProyectos\Index.cshtml" />
+    <Content Include="Views\ReporteUsuarios\_FiltroFases.cshtml" />
+    <Content Include="Views\ReporteUsuarios\_FiltroFasesProyecto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

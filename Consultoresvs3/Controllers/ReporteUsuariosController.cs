@@ -28,19 +28,19 @@ namespace Consultoresvs3.Controllers
 
             if (User.IsInRole("ADMIN"))
             {
-                ViewBag.idEmpresa = new SelectList(db.Empresas, "Id", "NombreEmpresa");            
+                ViewBag.idEmpresa = new SelectList(db.Empresas, "Id", "NombreEmpresa");
                 // traer a todos los usuarios, menos al administrador
                 ViewBag.UsuarioId = new SelectList(from u in db.Users
                                                    where u.Id != idusuario
                                                    select new { Id = u.Id, Nombre = u.Nombre + " " + u.Apellido }, "Id", "Nombre");
                 ViewBag.idProyecto = new SelectList(db.Proyectos, "Id", "Nombre");
-                var reporte_Empleados= db.ReporteUsuarios.Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
+                var reporte_Empleados = db.ReporteUsuarios.Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.FaseProyecto);
                 return View(reporte_Empleados.ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.IdProyecto));
             }
             else
             {
                 // En este ViewBag van los proyectos en los que se encuentra el empleado logeado actualmente
-                if (db.ReporteUsuarios.Where(r=>r.IdUsuario.Equals(idusuario)).Count()<=0)
+                if (db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Count() <= 0)
                 {
                     return RedirectToAction("Create");
                 }
@@ -53,13 +53,13 @@ namespace Consultoresvs3.Controllers
                                                         where up.IdUsuario == idusuario
                                                         group p by new { p.Id, p.Nombre } into proyectos
                                                         select new { proyectos.Key.Id, proyectos.Key.Nombre }, "Id", "Nombre");
-                    var reporte_Empleados = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio);
+                    var reporte_Empleados = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario)).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.FaseProyecto);
                     return View(reporte_Empleados.ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.IdProyecto));
                 }
-                
+
             }
-           
-            
+
+
         }
 
         // GET: ReporteUsuarios/Details/5
@@ -88,7 +88,7 @@ namespace Consultoresvs3.Controllers
                 ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
                 ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre");
                 ViewBag.IdFase = new SelectList(db.FaseProyectos, "Id", "NombreFase");
-            return View();
+                return View();
             }
             else
             {
@@ -101,23 +101,23 @@ namespace Consultoresvs3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FechaReporte,HTrabajadas,IdServicio,IdProyecto,IdUsuario")] ReporteUsuario reporteUsuario)
+        public ActionResult Create([Bind(Include = "Id,FechaReporte,HTrabajadas,IdServicio,IdProyecto,IdUsuario,IdFase")] ReporteUsuario reporteUsuario)
         {
             // ejecucionproyectos busca los proyectos que se encuentran en ejecucion
-            
-                if (ModelState.IsValid)
-                {
-                    reporteUsuario.IdUsuario = User.Identity.GetUserId();
-                    db.ReporteUsuarios.Add(reporteUsuario);
+
+            if (ModelState.IsValid)
+            {
+                reporteUsuario.IdUsuario = User.Identity.GetUserId();
+                db.ReporteUsuarios.Add(reporteUsuario);
                 db.Proyectos.Find(reporteUsuario.IdProyecto).HorasTrabajdas += reporteUsuario.HTrabajadas;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
-                ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre", reporteUsuario.IdServicio);
-                return View(reporteUsuario);
-            
-            
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.IdProyecto = new SelectList(db.Proyectos.Where(r => r.Estado.Nombre.ToUpper() != "FINALIZADO"), "Id", "Nombre");
+            ViewBag.IdServicio = new SelectList(db.Servicios, "Id", "Nombre", reporteUsuario.IdServicio);
+            return View(reporteUsuario);
+
+
         }
 
         // GET: ReporteUsuarios/Edit/5
@@ -188,19 +188,19 @@ namespace Consultoresvs3.Controllers
         //DF => Desacople Filtro ...
 
         // Filtrar proyectos en un intervalo de tiempo (2 fechas)
-        public dynamic DFentreFechasAdm(DateTime fecha1,DateTime fecha2)
+        public dynamic DFentreFechasAdm(DateTime fecha1, DateTime fecha2)
         {
             var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.CompareTo(fecha1) >= 0
-            && r.FechaReporte.CompareTo(fecha2) <= 0).Include(r => r.Usuario)
+            && r.FechaReporte.CompareTo(fecha2) <= 0).Include(r => r.Usuario).Include(r => r.FaseProyecto)
                 .Include(r => r.Proyecto).Include(r => r.Servicio)
-                .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id); 
+                .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id);
             return Reporte;
         }
         public dynamic DFentreFechasEmp(DateTime fecha1, DateTime fecha2)
         {
             var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.CompareTo(fecha1) >= 0
-            && r.FechaReporte.CompareTo(fecha2) <= 0).Include(r => r.Proyecto).Include(r => r.Servicio)
-                .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id); 
+            && r.FechaReporte.CompareTo(fecha2) <= 0).Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.FaseProyecto)
+                .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id);
             return Reporte;
         }
         // Consulta en la base de datos los reportes generados por el empleado logeado
@@ -208,31 +208,31 @@ namespace Consultoresvs3.Controllers
         public dynamic DFProyectoEmp(int? idProyecto)
         {
             string idusuario = User.Identity.GetUserId();
-            var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario) && r.IdProyecto == idProyecto).Include(r => r.Servicio)
+            var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(idusuario) && r.IdProyecto == idProyecto).Include(r => r.Servicio).Include(r => r.FaseProyecto)
                 .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.IdUsuario);
             return Reporte;
         }
         // Consulta en la base de datos los reportes generados 
         // trae  todos los reportes de un proyecto especifico
         public dynamic DFProyectoAdm(int? idProyecto) {
-            var Reporte = db.ReporteUsuarios.Where(r => r.IdProyecto == idProyecto).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio)
+            var Reporte = db.ReporteUsuarios.Where(r => r.IdProyecto == idProyecto).Include(r => r.Usuario).Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.FaseProyecto)
                 .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.IdUsuario);
             return Reporte;
         }
         // Consulta en la base de datos los reportes generados en un mes especifico
         //  del empleado logeado actualmente
-        public dynamic DFReporteUFechaEmp(int? mes, int?año)
+        public dynamic DFReporteUFechaEmp(int? mes, int? año)
         {
             string idusuario = User.Identity.GetUserId();
             var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month == mes && r.FechaReporte.Year == año && r.IdUsuario.Equals(idusuario))
-                .Include(r => r.Proyecto).Include(r => r.Servicio)
+                .Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.FaseProyecto)
                 .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id);
             return Reporte;
         }
         // Consulta en la base de datos los reportes generados en un mes especifico
         public dynamic DFReporteUFechaAdm(int? mes, int? año)
         {
-            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month == mes && r.FechaReporte.Year == año).Include(r => r.Usuario)
+            var Reporte = db.ReporteUsuarios.Where(r => r.FechaReporte.Month == mes && r.FechaReporte.Year == año).Include(r => r.Usuario).Include(r => r.FaseProyecto)
                 .Include(r => r.Proyecto).Include(r => r.Servicio)
                 .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Empresa.Id);
             return Reporte;
@@ -241,7 +241,7 @@ namespace Consultoresvs3.Controllers
         // a una empresa en especifico
         public dynamic DFiltroEmpresaAdm(int? idEmpresa)
         {
-            var Reporte = db.ReporteUsuarios.Where(r => r.Proyecto.IdEmpresa == idEmpresa).Include(r => r.Proyecto).Include(r => r.Usuario).Include(r => r.Proyecto.Empresa).Include(r => r.Servicio)
+            var Reporte = db.ReporteUsuarios.Where(r => r.Proyecto.IdEmpresa == idEmpresa).Include(r => r.Proyecto).Include(r => r.Usuario).Include(r => r.Proyecto.Empresa).Include(r => r.Servicio).Include(r => r.FaseProyecto)
                .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.Proyecto.Id);
             return Reporte;
         }
@@ -249,7 +249,20 @@ namespace Consultoresvs3.Controllers
         // un empleado en especifico 
         public dynamic DFiltroEmpleadoAdm(string UsuarioId)
         {
-            var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(UsuarioId)).Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.Proyecto.Empresa)
+            var Reporte = db.ReporteUsuarios.Where(r => r.IdUsuario.Equals(UsuarioId)).Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.Proyecto.Empresa).Include(r => r.FaseProyecto)
+                .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.IdProyecto);
+            return Reporte;
+        }
+        // consulta por Fase de proyecto
+        public dynamic DFiltroFases(int id)
+        {
+            var Reporte = db.ReporteUsuarios.Where(r => r.FaseProyecto.Id.Equals(id)).Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.Proyecto.Empresa).Include(r => r.FaseProyecto)
+                .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.IdProyecto);
+            return Reporte;
+        }
+        public dynamic DFiltroFases_Proyecto(int idfase, int idproyecto)
+        {
+            var Reporte = db.ReporteUsuarios.Where(r => r.FaseProyecto.Id.Equals(idfase)).Where(r => r.Proyecto.Id.Equals(idproyecto)).Include(r => r.Proyecto).Include(r => r.Servicio).Include(r => r.Proyecto.Empresa).Include(r => r.FaseProyecto)
                 .ToList().OrderByDescending(r => r.FechaReporte).OrderByDescending(r => r.IdProyecto);
             return Reporte;
         }
@@ -257,6 +270,18 @@ namespace Consultoresvs3.Controllers
         // Queremos mostrar la informacion que tiene cada empleado según un proyecto en especial.
 
         // Retorna los resultados de cada consulta en la vista, y muestra los reportes
+        [HttpPost]
+        public ActionResult FiltroFases(int id)
+        {
+            var Reporte = DFiltroFases(id);
+            return PartialView("_FiltroFases",Reporte);
+        }
+        [HttpPost]
+        public ActionResult FiltroFasesProyecto(int idproyecto, int idfase)
+        {
+            var Reporte = DFiltroFases_Proyecto(idfase, idproyecto);
+            return PartialView("_FiltroFasesProyecto", Reporte);
+        }
         [HttpPost]
         public ActionResult FiltroentreFechasAdm(DateTime fecha1,DateTime fecha2)
         {
