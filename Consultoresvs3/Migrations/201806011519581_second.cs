@@ -3,7 +3,7 @@ namespace Consultoresvs3.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class secondMigration : DbMigration
+    public partial class second : DbMigration
     {
         public override void Up()
         {
